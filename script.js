@@ -181,3 +181,65 @@ console.log(myVar2); // null // the variable is assigned a null value
 // The main difference between undefined and null is that undefined indicates that a variable has not been assigned a value, while null indicates that a variable has been intentionally set to have no value. In other words, undefined means "no value assigned," while null means "no value exists."
 
 
+//undefined is by default when a variable is declared but not assigned a value, while null is explicitly assigned to indicate the absence of a value.
+//but null is manually assigned to a variable to indicate that it should not have a value, while undefined is automatically assigned by JavaScript when a variable is declared but not initialized.
+
+
+
+
+
+//Operators
+//Operators are special symbols in JavaScript that perform operations on values or variables. They can be classified into several categories based on their functionality:
+
+// 1. Arithmetic Operators: These operators perform mathematical operations on numbers. They include:
+//    - Addition (+): Adds two numbers together.
+let sum = 5 + 10; // 15
+//    - Subtraction (-): Subtracts one number from another.
+let difference = 10 - 5; // 5
+//    - Multiplication (*): Multiplies two numbers together.
+let product = 5 * 10; // 50
+//    - Division (/): Divides one number by another.
+let quotient = 10 / 5; // 2
+//    - Modulus (%): Returns the remainder of a division operation. 
+let remainder = 10 % 3; // 1
+//    - Exponentiation (**): Raises a number to the power of another number.
+let power = 2 ** 3; // 8 (2 raised to the power of 3)
+//    - Increment (++) and Decrement (--): Increases or decreases a number by 1, respectively.
+let increment = 5;
+increment++; // 6
+let decrement = 10;
+decrement--; // 9
+
+
+// 2. Comparison Operators: These operators compare two values and return a boolean result (true or false). They include:
+//    - Equal to (==): Checks if two values are equal, performing type coercion if necessary.
+let isEqual = (5 == '5'); // true (type coercion occurs)
+//    - Strict Equal to (===): Checks if two values are equal without performing type coercion.
+let isStrictEqual = (5 === '5'); // false (no type coercion, different types)
+//    - Not Equal to (!=): Checks if two values are not equal, performing type coercion if necessary.
+let isNotEqual = (5 != '5'); // false (type coercion occurs)
+//    - Strict Not Equal to (!==): Checks if two values are not equal without performing type coercion.
+let isStrictNotEqual = (5 !== '5'); // true (no type coercion, different types)
+//    - Greater than (>): Checks if the left value is greater than the right value.
+let isGreaterThan = (10 > 5); // true
+//    - Less than (<): Checks if the left value is less than the right value.
+let isLessThan = (5 < 10); // true
+//    - Greater than or Equal to (>=): Checks if the left value is greater than or equal to the right value.
+let isGreaterThanOrEqual = (10 >= 10); // true
+//    - Less than or Equal to (<=): Checks if the left value is less than or equal to the right value.
+let isLessThanOrEqual = (5 <= 10); // true
+//    - Nullish Coalescing (??): Returns the right-hand operand if the left-hand operand is null or undefined, otherwise returns the left-hand operand.
+let value = null;
+let defaultValue = value ?? 'default'; // 'default' (value is null, so default is returned)
+
+
+//3. Assignment Operators: These operators assign values to variables. They include:
+//    - Assignment (=): Assigns a value to a variable.
+let v = 10; // assigns 10 to v
+v+=3; // added 3 saved 13
+v-=11; // substacted 11 saved 2
+v*=2; // into 2 saved 4
+v/=2 // 4/2 saved 2
+v%=1 // 2/1  saved 1
+
+//4. Logical Operator 
