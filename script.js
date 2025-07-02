@@ -108,3 +108,35 @@ console.log(myObj); // { name: "John", age: 31 } // the object is still the same
 
 //Data types + Type System
 
+// data types in javascript are divided into two categories:
+
+
+// 1. Primitive data types: These are the basic data types that cannot be broken down
+//    into smaller data types. They include:
+//    - Number: Represents numeric values, both integers and floating-point numbers.    
+//    - String: Represents a sequence of characters, enclosed in single or double quotes.
+//    - Boolean: Represents a logical value, either true or false. 
+//    - Undefined: Represents a variable that has been declared but not assigned a value.
+//    - Null: Represents the intentional absence of any object value.
+//    - Symbol: Represents a unique and immutable value, often used as object property keys.
+//    - BigInt: Represents integers with arbitrary precision, allowing for very large numbers.
+
+
+// 2. Non-primitive data types: These are more complex data types that can hold multiple values or properties. They include:
+//    - Object{}: Represents a collection of key-value pairs, where keys are strings and values can be of any data type. example:
+let person = {
+    name: "John",
+    age: 30,
+    isEmployed: true
+}; // object with properties name, age, and isEmployed
+
+//    - Array[]: Represents an ordered collection of values, which can be of any data type. example:
+let numbers = [1, 2, 3, 4, 5]; // array of numbers
+
+//    - Function(): Represents a reusable block of code that can be called with arguments and returns a value.example:
+function add(a, b) {
+    return a + b; // function that takes two arguments and returns their sum
+}
+
+
+
