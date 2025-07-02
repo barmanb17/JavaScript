@@ -50,5 +50,34 @@ function myFunction() {
     console.log(blockVar); // I am a block variable
 }   
 
-//
+//Reassignment and redeclaration
+//Reassignment is the process of changing the value of a variable that has already been declared. This can be done with variables declared using let and var, but not with variables declared using const. example:
+let myVar = 10; // variable declared and initialized
+myVar = 20; // variable reassigned
+
+//Redeclaration is the process of declaring a variable that has already been declared in the same scope. This can be done with variables declared using var, but not with variables declared using let or const. example:
+var myVar2 = 10; // variable declared and initialized
+var myVar2 = 20; // variable redeclared and initialized
+
+
+
+
+//Temporary Dead Zone (TDZ)
+//The Temporary Dead Zone (TDZ) is a behavior in JavaScript that occurs when a variable is accessed before it has been declared. This can happen with variables declared using let and const. If you try to access a variable before it has been declared, you will get a ReferenceError. example:
+console.log(myVar3); // ReferenceError: myVar3 is not defined
+let myVar3 = 10; // variable declared and initialized
+//The TDZ is the time between the start of the block and the declaration of the variable. During this time, the variable is not accessible, and any attempt to access it will result in a ReferenceError. Once the variable is declared, it can be accessed normally.
+//The TDZ is important because it helps to prevent errors in your code by ensuring that variables are declared before they are used. It also helps to make your code more readable by making it clear when a variable is declared and when it is used.
+
+//tdz is the upper bound of the block scope, meaning that any variable declared with let or const cannot be accessed before it is declared. This is different from var, which can be accessed before it is declared, but will return undefined instead of throwing an error.
+
+//hoisting is a behavior in JavaScript where variables and functions are moved to the top of their scope during the compilation phase. This means that you can use a variable or function before it is declared in your code. However, this only applies to variables declared with var, not with let or const. example:
+
+let g = undefined;
+
+console.log(a);
+
+a = 12;
+
+// In this example, the variable a is hoisted to the top of the scope, but it is not initialized until after the console.log statement. This means that the console.log statement will return undefined instead of throwing an error. If you try to access a variable declared with let or const before it is declared, you will get a ReferenceError instead of undefined.
 
