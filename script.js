@@ -140,3 +140,27 @@ function add(a, b) {
 
 
 
+//Type coercion
+
+//Type coercion is the automatic or implicit conversion of values from one data type to another. JavaScript performs type coercion in certain situations, such as when performing arithmetic operations or comparing values. 
+// example:
+let num = 5; // number
+let str = "10"; // string
+let result = num + str; // type coercion occurs here, num is converted to a string
+console.log(result); // "510" // the number is converted to a string and concatenated with the string
+
+//concatination is the process of joining two or more strings together. In JavaScript, you can concatenate strings using the + operator. When you use the + operator with a string and a number, JavaScript will automatically convert the number to a string before concatenating them. This is an example of type coercion.
+// In the example above, the number 5 is converted to a string "5" and then concatenated with the string "10", resulting in the final output "510".
+
+//Type coercion can lead to unexpected results, so it's important to be aware of how JavaScript handles different data types and to use explicit type conversion when necessary. example:
+let num2 = 5; // number
+let str2 = "10"; // string
+let result2 = num2 + Number(str2); // explicit type conversion using Number() function
+console.log(result2); // 15 // the string is converted to a number and added to the number
+
+
+//Truthy vs Falsy values
+// In JavaScript, values can be classified as either truthy or falsy. Truthy values are those that evaluate to true in a boolean context, while falsy values evaluate to false. example of
+//  truthy values include non-empty strings, non-zero numbers, and objects. 
+
+// Falsy values include false, 0, "", null, undefined, and NaN (Not a Number).
