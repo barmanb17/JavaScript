@@ -242,4 +242,26 @@ v*=2; // into 2 saved 4
 v/=2 // 4/2 saved 2
 v%=1 // 2/1  saved 1
 
-//4. Logical Operator 
+//4. Logical Operator:
+  //  && - if both are true final true
+  //  || - if one is true final true
+  //  !  - if true final false, if false final true 
+
+
+  //5. Unary Operators:
+  // Unary operators operate on a single operand and perform operations such as negation or incrementing/decrementing a value. They include:
+//    - Unary Plus (+): Converts a value to a number. example- +"5" =5(number), +"harsh" = NaN
+//    - typeof - tells the type of the object
+
+
+// typeof null = 'object', typepf array[] = 'object', typeof object{} = 'object', type of function() = 'function', type of NaN = 'number'.
+
+
+ // ++ , -- => adds and substacts aage and piche
+
+
+ 
+//6. Ternary Operator:
+// condition ? if true then its code : if false then its code
+
+
