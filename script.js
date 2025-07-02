@@ -164,3 +164,20 @@ console.log(result2); // 15 // the string is converted to a number and added to 
 //  truthy values include non-empty strings, non-zero numbers, and objects. 
 
 // Falsy values include false, 0, "", null, undefined, and NaN (Not a Number).
+
+//true= 0, false= 1, null=0, !!undefined=false
+
+//why NaN is a number?
+// NaN stands for "Not a Number" and is a special value in JavaScript that represents an invalid or undefined numerical operation. It is considered a number type because it is part of the Number data type in JavaScript. However, it is not equal to any other number, including itself. ie- failed mathematical operations.
+
+
+//undefined vs null
+//undefined is a primitive value that indicates that a variable has been declared but has not been assigned a value. It is the default value of uninitialized variables. example:
+let myVar1; // variable declared but not assigned a value
+console.log(myVar1); // undefined // the variable is declared but not assigned a value
+//null is a primitive value that represents the intentional absence of any object value. It is often used to indicate that a variable should not have a value or that an object property does not exist. example:
+let myVar2 = null; // variable assigned a null value
+console.log(myVar2); // null // the variable is assigned a null value
+// The main difference between undefined and null is that undefined indicates that a variable has not been assigned a value, while null indicates that a variable has been intentionally set to have no value. In other words, undefined means "no value assigned," while null means "no value exists."
+
+
