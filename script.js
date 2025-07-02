@@ -75,9 +75,36 @@ let myVar3 = 10; // variable declared and initialized
 
 let g = undefined;
 
-console.log(a);
+console.log(g);
 
-a = 12;
+g = 12;
 
 // In this example, the variable a is hoisted to the top of the scope, but it is not initialized until after the console.log statement. This means that the console.log statement will return undefined instead of throwing an error. If you try to access a variable declared with let or const before it is declared, you will get a ReferenceError instead of undefined.
+
+//practive
+var q = 1;
+{
+    var q = 2;
+}
+
+console.log(q); // 2 because var is global and function scoped, so it is accessible outside the block
+
+//practice
+let aa = 10;
+{
+    let aa = 20; // this is a different variable than the one declared outside the block
+    console.log("inside", aa); // 20
+}
+console.log("outside", aa); // 10 because the variable aa declared outside the block is not affected by the variable aa declared inside the block
+
+//Why var leaks outside block but let does not?
+//This is because var is function scoped, meaning that it is accessible anywhere in the function, while let is block scoped, meaning that it is only accessible within the block in which it is declared. When you declare a variable with var inside a block, it is still accessible outside the block because it is function scoped. However, when you declare a variable with let inside a block, it is not accessible outside the block because it is block scoped.
+
+//Why const allows changing object properties ?
+//This is because const only prevents reassignment of the variable itself, not the properties of the object. When you declare an object with const, you cannot reassign the object to a new value, but you can still change the properties of the object. example:
+const myObj = { name: "John", age: 30 }; // object declared with const
+myObj.age = 31; // changing the age property of the object  
+console.log(myObj); // { name: "John", age: 31 } // the object is still the same, but the age property has been changed
+
+//Data types + Type System
 
