@@ -304,3 +304,44 @@ console.log(rps("rock", "scissor"));
 
 
 //Loops
+
+// 1. for loop
+// The for loop is used to iterate over a block of code a specified number of times.
+ for(let i = 1; i<101; i++) {
+    console.log(i); // prints numbers from 1 to 100
+ }
+
+// 2. while loop
+// The while loop is used to repeatedly execute a block of code as long as a specified condition is true.
+let j = 1;
+ while (j < 20) {
+    console.log(j); // prints numbers from 1 to 19
+    j++;
+ }
+
+// 3. do while loop
+// The do while loop is similar to the while loop, but it guarantees that the block of code will be executed at least once, even if the condition is false.
+ let  k = 1;
+ do {
+    console.log(k); // prints numbers from 1 to 19
+    k++;
+ } while (k < 20);
+
+ // 4.break statement
+// The break statement is used to exit a loop prematurely when a certain condition is met.
+for (let l = 1; l <= 10; l++) {
+    if (l === 5) {
+        break; // exits the loop when l is equal to 5
+    }
+    console.log(l); // prints numbers from 1 to 4
+}
+
+// 5.continue statement
+// The continue statement is used to skip the current iteration of a loop and move to the next iteration.
+for (let m = 1; m <= 10; m++) {
+    if (m === 5) {
+        continue; // skips the iteration when m is equal to 5
+    }
+    console.log(m); // prints numbers from 1 to 10, skipping 5
+}
+
