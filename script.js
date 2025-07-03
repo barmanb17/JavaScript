@@ -285,6 +285,22 @@ function getGrade(score) {
 
 console.log(getGrade(54));
 
-// 4. for loop
-// for loop is used to iterate over a block of code a specified number of times. It
+//rock-paper-scissor logic
 
+function rps(user, computer){
+    if( user === computer) return "draw";
+
+    if(user === "rock" && computer === "scissor") return "user";
+    if(user === "scissor" && computer === "paper") return "user";
+    if (user === "paper" && computer === "rock") return "user";
+
+    return "computer";
+}
+console.log(rps("rock", "scissor"));
+
+
+
+
+
+
+//Loops
