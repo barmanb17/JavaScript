@@ -569,3 +569,38 @@ function isAdult(age) {
 
 console.log(isAdult(20)); // true
 console.log(isAdult(15)); // false
+
+
+/*
+First Class Functions in JavaScript
+
+JavaScript treats functions as first-class citizens, meaning:
+- Functions can be assigned to variables.
+- Functions can be passed as arguments to other functions.
+- Functions can be returned from other functions.
+
+Examples:
+*/
+
+// Assigning a function to a variable
+const sayHi = function() {
+    console.log("Hi!");
+};
+sayHi(); // Hi!
+
+// Passing a function as an argument (callback)
+function executeCallback(callback) {
+    callback();
+}
+executeCallback(sayHi); // Hi!
+
+// Returning a function from another function
+function createMultiplier(x) {
+    return function(y) {
+        return x * y;
+    };
+}
+const double = createMultiplier(2);
+console.log(double(5)); // 10
+
+// This flexibility is what enables higher-order functions and functional programming patterns in JavaScript.
