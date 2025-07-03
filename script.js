@@ -455,3 +455,117 @@
 //     }
 //     if (count === 5) break;
 // }
+
+
+//common confusions
+
+//1. When to use for and while loop ?
+// Use a for loop when you know in advance how many times you want to execute a statement or a block of code (e.g., iterating over arrays, counting from 1 to 10).
+// Use a while loop when you want to repeat a block of code an indefinite number of times, as long as a certain condition is true (e.g., waiting for user input, reading data until the end).
+
+
+
+
+
+//Function:
+//What is function and why we use it:
+// A function is a reusable block of code designed to perform a specific task.
+// We use functions to organize code, avoid repetition, and make programs easier to read, maintain, and test.
+
+
+// Function Declaration
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+console.log(greet("Vijay")); // Hello, Vijay!
+
+// Function Expression
+const add = function(a, b) {
+    return a + b;
+};
+console.log(add(2, 3)); // 5
+
+// Arrow Function
+const multiply = (a, b) => a * b;
+console.log(multiply(4, 5)); // 20
+
+// Default Parameters
+function sayHello(name = "Guest") {
+    return `Hello, ${name}!`;
+}
+console.log(sayHello()); // Hello, Guest!
+
+// Rest Parameters is a feature that allows a function to accept an (indefinite number of arguments) as an array. It is denoted by three dots (...) before the parameter name.
+// This is useful when you want to create a function that can handle a variable number of arguments
+function sumAll(...numbers) {
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+console.log(sumAll(1, 2, 3, 4)); // 10
+
+// Spread Parameters (Spread Syntax)
+// The spread syntax (...) allows an iterable (like an array) to be expanded in places where zero or more arguments or elements are expected.
+
+// Example: Passing array elements as arguments to a function
+function maxOfThree(a, b, c) {
+    return Math.max(a, b, c);
+}
+const nums = [3, 7, 2];
+console.log(maxOfThree(...nums)); // 7
+
+// Example: Combining arrays
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+const combined = [...arr1, ...arr2];
+console.log(combined); // [1, 2, 3, 4]
+
+// Example: Copying arrays
+const original = [5, 6, 7];
+const copy = [...original];
+console.log(copy); // [5, 6, 7]
+
+// Callback Function
+function processUserInput(callback) {
+    const name = "Vijay";
+    callback(name);
+}
+processUserInput(function(name) {
+    console.log(`Welcome, ${name}!`);
+});
+
+
+
+//parameters and arguments
+
+// Parameters are variables listed as part of the function definition.
+// Arguments are the actual values passed to the function when it is called.
+
+function example(param1, param2) { // param1 and param2 are parameters
+    console.log(param1, param2);
+}
+
+example(10, 20); // 10 and 20 are arguments
+
+
+// Return Values and Early Return
+
+// A function can return a value using the return statement.
+// Once a return statement is executed, the function stops executing (early return).
+
+function divide(a, b) {
+    if (b === 0) {
+        return "Cannot divide by zero"; // early return if invalid input
+    }
+    return a / b; // returns the result if input is valid
+}
+
+console.log(divide(10, 2)); // 5
+console.log(divide(10, 0)); // Cannot divide by zero
+
+// Example: Early return to exit a function when a condition is met
+function isAdult(age) {
+    if (age < 18) return false; // early return if under 18
+    return true;
+}
+
+console.log(isAdult(20)); // true
+console.log(isAdult(15)); // false
