@@ -729,3 +729,57 @@ const counter2 = makeCounter();
 console.log(counter2()); // 1 (separate closure)
 
 // Closures are useful for data privacy and maintaining state between function calls.
+
+
+/*
+IIFE (Immediately Invoked Function Expression)
+
+An IIFE is a function that is defined and executed immediately after its creation.
+It is commonly used to create a new scope and avoid polluting the global namespace.
+
+Syntax:
+(function() {
+    // code here
+})();
+
+or with arrow function:
+(() => {
+    // code here
+})();
+
+Examples:
+*/
+
+// Basic IIFE
+(function() {
+    console.log("This runs immediately!");
+})();
+
+// IIFE with parameters
+(function(name) {
+    console.log(`Hello, ${name}!`);
+})("Vijay");
+
+// IIFE with return value
+const result = (function(a, b) {
+    return a + b;
+})(2, 3);
+console.log(result); // 5
+
+// IIFE for data privacy (creating private variables)
+const counterModule = (function() {
+    let count = 0;
+    return {
+        increment: function() {
+            count++;
+            return count;
+        },
+        getCount: function() {
+            return count;
+        }
+    };
+})();
+console.log(counterModule.increment()); // 1
+console.log(counterModule.getCount());  // 1
+
+// IIFEs are useful for encapsulation and avoiding variable collisions in the global scope.
