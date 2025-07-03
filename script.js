@@ -604,3 +604,128 @@ const double = createMultiplier(2);
 console.log(double(5)); // 10
 
 // This flexibility is what enables higher-order functions and functional programming patterns in JavaScript.
+
+
+
+/*
+Higher-Order Functions in JavaScript
+
+A higher-order function is a function that does at least one of the following:
+- Takes one or more functions as arguments (callbacks)
+- Returns a function as its result
+
+Common examples in JavaScript are array methods like forEach, map, filter, and reduce.
+
+Examples:
+*/
+
+// 1. A function that takes another function as an argument
+function repeat(n, action) {
+    for (let i = 0; i < n; i++) {
+        action(i);
+    }
+}
+repeat(3, console.log); // prints 0, 1, 2
+
+// 2. Array map: takes a function and applies it to each element
+const numbers = [1, 2, 3, 4];
+const squared = numbers.map(num => num * num);
+console.log(squared); // [1, 4, 9, 16]
+
+// 3. Array filter: filters elements based on a function
+const evens = numbers.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4]
+
+// 4. Array reduce: reduces array to a single value using a function
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+console.log(sum); // 10
+
+// 5. A function that returns another function
+function greeter(greeting) {
+    return function(name) {
+        return `${greeting}, ${name}!`;
+    };
+}
+const sayHello = greeter("Hello");
+console.log(sayHello("Vijay")); // Hello, Vijay!
+
+// Higher-order functions enable powerful abstractions and functional programming patterns in JavaScript.
+
+
+
+/*
+Pure vs Impure Functions
+
+A pure function is a function that:
+- Given the same input, always returns the same output.
+- Does not cause any side effects (does not modify external state, variables, or data outside its scope).
+
+An impure function is a function that:
+- May return different outputs for the same input.
+- May cause side effects (modifies external state, logs to console, changes global variables, etc.).
+
+Examples:
+*/
+
+// Pure function
+function addPure(a, b) {
+    return a + b;
+}
+console.log(addPure(2, 3)); // 5 (always returns 5 for 2, 3)
+
+// Impure function (modifies external variable)
+let counter = 0;
+function incrementImpure() {
+    counter++;
+    return counter;
+}
+console.log(incrementImpure()); // 1
+console.log(incrementImpure()); // 2 (output depends on external state)
+
+// Impure function (side effect: logging)
+function logMessage(message) {
+    console.log(message); // side effect: writes to console
+}
+logMessage("Hello!");
+
+// Pure functions are predictable and easier to test, while impure functions can introduce bugs due to side effects.
+
+
+
+
+/*
+Closures and Lexical Scoping
+
+Lexical scoping means that a function can access variables from its own scope, as well as from its parent (outer) scopes.
+
+A closure is created when a function "remembers" the variables from its lexical scope even after the outer function has finished executing.
+
+Examples:
+*/
+
+// Lexical Scoping Example
+function outer() {
+    let outerVar = "I'm from outer!";
+    function inner() {
+        console.log(outerVar); // inner can access outerVar due to lexical scoping
+    }
+    inner();
+}
+outer(); // Output: I'm from outer!
+
+// Closure Example
+function makeCounter() {
+    let count = 0;
+    return function() {
+        count++;
+        return count;
+    };
+}
+const counter1 = makeCounter();
+console.log(counter1()); // 1
+console.log(counter1()); // 2
+
+const counter2 = makeCounter();
+console.log(counter2()); // 1 (separate closure)
+
+// Closures are useful for data privacy and maintaining state between function calls.
