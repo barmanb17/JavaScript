@@ -265,3 +265,26 @@ v%=1 // 2/1  saved 1
 // condition ? if true then its code : if false then its code
 
 
+//pre vs post increment is // pre-increment: ++x (increments x before using its value)
+// post-increment: x++ (increments x after using its value)
+// pre-decrement: --x (decrements x before using its value)
+
+
+
+//Control flow 
+// 1.if else- if else if else
+// 2.switch case
+
+//3. early return pattern-
+function getGrade(score) {
+    if (score >= 90 && score <=100 ) return "A";
+    if (score >= 80 && score <= 89 ) return "B";
+    if (score >= 70 && score <= 79 ) return "C";
+    return "invalid marks"
+}
+
+console.log(getGrade(54));
+
+// 4. for loop
+// for loop is used to iterate over a block of code a specified number of times. It
+
