@@ -1113,4 +1113,170 @@ console.log(doubled); // Output: [2, 4, 6]
 
 
 //Arrays
+// ARRAYS
 
+// What is an array?
+// An array is an ordered collection of values (elements), which can be of any type.
+// Arrays are zero-indexed (first element is at index 0).
+
+// Creating arrays
+let arr = [1, 2, 3, 4];
+let mixed = [1, "hello", true, null];
+
+// Accessing elements
+console.log(arr[0]); // 1
+console.log(mixed[1]); // "hello"
+
+// Modifying elements
+arr[2] = 99;
+console.log(arr); // [1, 2, 99, 4]
+
+// Array length
+console.log(arr.length); // 4
+
+// Adding elements
+arr.push(5); // adds to end
+arr.unshift(0); // adds to start
+console.log(arr); // [0, 1, 2, 99, 4, 5]
+
+// Removing elements
+arr.pop(); // removes from end
+arr.shift(); // removes from start
+console.log(arr); // [1, 2, 99, 4]
+
+// Iterating over arrays
+for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+}
+
+// for...of loop
+for (let val of arr) {
+    console.log(val);
+}
+
+// Array methods
+
+// forEach: executes a function for each element
+arr.forEach(function (val, idx) {
+    console.log(`Index ${idx}: ${val}`);
+});
+
+// map: creates a new array by applying a function to each element
+//map sirf tab use karna hain jab ek naya array banana hain pichle array ki data ke basis pe
+//return is mandatory for map otherwise undefined
+let doubleds = arr.map(x => x * 2);
+console.log(doubleds);
+
+// filter: creates a new array with elements that pass a test
+let evenss = arr.filter(x => x % 2 === 0);
+console.log(evenss);
+
+let arrrr= [1,2,3,4,5,6,7,8]
+
+let newarrrr = arrrr.filter(function(val){
+    if(val> 4) return val;
+})
+// reduce: reduces array to a single value
+let summ= arr.reduce((acc, curr) => acc + curr, 0);
+console.log(sum);
+// ✅ Add all numbers in the array using reduce
+
+let adds = [1, 2, 3, 4, 5]; // An array of numbers to be summed
+let ans = adds.reduce(function(acc, curr) {
+    // 'acc' (accumulator) holds the running total
+    // 'curr' (current) is the current element in the array
+    return acc + curr; // Add current number to the accumulator
+}, 0); // 0 is the initial value of the accumulator
+console.log(ans); // Output: 15
+
+
+// includes: checks if array contains a value
+console.log(arr.includes(99)); // true
+
+// indexOf: returns index of value, or -1 if not found
+console.log(arr.indexOf(99)); // 2
+
+// slice: returns a shallow copy of a portion of an array
+let sub = arr.slice(1, 3); // from index 1 up to (not including) 3
+console.log(sub);
+
+// splice: adds/removes elements (modifies original array)
+arr.splice(1, 1, 42); // at index 1, remove 1 element, insert 42
+console.log(arr);
+
+//sort - acecending or decending order sorting arr.sort(function(){}) -sorting always returns function
+
+// concat: combines arrays
+let arr22 = [7, 8];
+let combinedd = arr.concat(arr22);
+console.log(combined);
+
+// spread syntax for copying/combining
+let copyy = [...arr];
+let merged = [...arr, ...arr2];
+console.log(copy, merged);
+
+// Multidimensional arrays
+let matrix = [
+    [1, 2],
+    [3, 4]
+];
+console.log(matrix[1][0]); // 3
+
+// Practice: Reverse an array
+let reversed = arr.slice().reverse();
+console.log(reversed);
+
+// Practice: Find the maximum value in an array
+let max = Math.max(...arr);
+console.log(max);
+
+// Practice: Remove duplicates from an array
+let withDuplicates = [1, 2, 2, 3, 4, 4, 5];
+let unique = [...new Set(withDuplicates)];
+console.log(unique);
+
+// Arrays are reference types
+let a = [1, 2, 3];
+let b = a;
+b[0] = 99;
+console.log(a); // [99, 2, 3] (a and b refer to the same array)
+
+// To copy an array (shallow copy), use slice or spread
+let c = [...a];
+c[0] = 1;
+console.log(a, c); // [99, 2, 3] [1, 2, 3]
+
+// destructuring and spread operator
+// Array destructuring
+const arr3 = [10, 20, 30, 40];
+const [first, second, ...rest] = arr3;
+console.log(first); // 10
+console.log(second); // 20
+console.log(rest); // [30, 40]
+
+// Object destructuring
+const personObj = { name: "Vijay", age: 25, city: "Delhi" };
+const { name, age, city } = personObj;
+console.log(name); // Vijay
+console.log(age); // 25
+console.log(city); // Delhi
+
+// Renaming during destructuring
+const { name: personName } = personObj;
+console.log(personName); // Vijay
+
+// Default values in destructuring
+const { country = "India" } = personObj;
+console.log(country); // India
+
+// Spread operator with objects
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 };
+console.log(obj2); // { a: 1, b: 2, c: 3 }
+
+// Spread operator with arrays
+const arr4 = [1, 2];
+const arr5 = [3, 4];
+const combinedArr = [...arr4, ...arr5];
+console.log(combinedArr); // [1, 2, 3, 4]
