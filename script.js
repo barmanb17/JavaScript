@@ -1645,3 +1645,18 @@ Object.entries(coourse).forEach(function(val){
     console.log(val[0] + ":" + val[1]);
 });
 
+//copy the object using spread operator;
+
+const originals = { a:1, b:2};
+const copys = {...originals};
+
+//deep clone of obj11 safely
+const obj11 = {info: {score: 80}};
+let newobj = JSON.parse(JSON.stringify(obj11))
+
+//use a variable to dynamically assign a property;
+const ke3y = "role";
+let oobj = {
+    name: "hrash",
+    [ke3y]: "admin",
+};
