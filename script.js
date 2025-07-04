@@ -818,10 +818,82 @@ hoistedExpression(); // Works after assignment: Output -> "I am a function expre
 
 //2. Use rest parameter to accept any number of scores and return the total.
 
-let getScore = (...socres) => {
+let getScore = (...scores) => {
    let total = 0;
-   socres.forEach(function(val){
+   scores.forEach(function(val){
     total = total + val;
-   })
+   });
+   return total;
 }
 getScore( 2,4,5,8)
+
+//3q.
+function f(){
+    return;
+}
+
+console.log(f()); //output- undefined
+
+
+//4. What does it mean when we say "functions are first-class citizens" ?
+
+
+//5. Can you assign a funcion to a variable and then call it : 
+
+// let var = function(){
+
+// }
+// var()
+
+//5. Pass a function into another function and execute it inside.
+
+function abcd(val){
+    val();
+}
+abcd(function (){
+    console.log("hey");
+});
+
+
+
+// A higher-order function is a function that takes one or more functions as arguments, or returns a function as its result.
+// Examples: Array methods like map, filter, reduce, or any function that accepts a callback or returns a function.
+
+function higherOrderExample(callback) {
+    // Takes a function as an argument (callback)
+    callback();
+}
+
+higherOrderExample(function() {
+    console.log("This is a callback function passed to a higher-order function.");
+});
+
+// A function returning another function
+function createGreeting(greeting) {
+    return function(name) {
+        return `${greeting}, ${name}!`;
+    };
+}
+
+const greetHello = createGreeting("Hello");
+console.log(greetHello("Vijay")); // Hello, Vijay!
+
+
+//Convert the below function into a pure function
+
+// let total = 0;
+// function addToTotal(num){
+//     total += num;
+// }
+
+// //solution:
+// let total = 0;
+// function addToTotal(num){
+//     let newTotal = 0;
+//     newTotal += num;
+//     return newTotal;
+// }
+
+
+//What is closure ? when is it created?
+//If a child (inner function) remembers things from their parent (outer function) even after the parent has left — that's a closure.
