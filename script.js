@@ -1280,3 +1280,24 @@ const arr4 = [1, 2];
 const arr5 = [3, 4];
 const combinedArr = [...arr4, ...arr5];
 console.log(combinedArr); // [1, 2, 3, 4]
+
+//practice
+
+//create a array with 3 fruits and print the second fruit.
+
+let fruits = [ "apple", "banana", "coconut"]
+
+console.log(fruits[1]);
+
+//add "mango" at the end and "pineapple" at the beginning.
+fruits.push("mango")
+fruits.unshift("pineapple")
+console.log(fruits)
+
+//replace "banana" with Kiwi
+fruits.splice(1,1,"kiwi")
+console.log(fruits)
+
+//inset "red" and "blue" at index 1 in this array.
+let color = ["green", "yellow"]
+color.splice(0, 0, "red", "yellow")
