@@ -897,3 +897,58 @@ console.log(greetHello("Vijay")); // Hello, Vijay!
 
 //What is closure ? when is it created?
 //If a child (inner function) remembers things from their parent (outer function) even after the parent has left — that's a closure.
+
+
+//Convert this normal funcion into an IIFE
+function init(){
+    console.log("initailized")
+}
+
+//sol:
+(function init(){
+    console.log("initailized")
+})();
+
+
+//What is the use of IIFE? Name one real world use case.
+//IIFE is used to run code immediately and keep variables private.
+
+
+
+//Write a BMI calculator;
+
+function bmi(weight, height){
+    return weight/ (height*height);
+}
+console.log(bmi(69, 1.8).toFixed(2));
+
+
+
+// ✅ Create a reusable discount calculator using a Higher-Order Function (HOF)
+
+function discountCalculator(discount) {
+    // This outer function takes a 'discount' percentage as input
+    // and returns a new function customized for that discount rate
+
+    return function (price) {
+        // This inner function takes a 'price' and applies the outer 'discount' to it
+        // Formula: discounted price = original price - discount amount
+        return price - price * (discount / 100);
+    };
+}
+
+// Create a discount function for 10% discount
+let ten = discountCalculator(10);
+
+// Create a discount function for 20% discount
+let twenty = discountCalculator(20);
+
+// Use the 10% discount function on price 1200 → should return 1080
+console.log(ten(1200));
+
+// Use the 20% discount function on price 200 → should return 160
+console.log(twenty(200));
+
+
+
+
