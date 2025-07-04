@@ -783,3 +783,45 @@ console.log(counterModule.increment()); // 1
 console.log(counterModule.getCount());  // 1
 
 // IIFEs are useful for encapsulation and avoiding variable collisions in the global scope.
+
+
+
+
+// Hoisting: Difference between Function Declaration and Function Expression
+
+// Function Declaration is hoisted completely (both name and body)
+hoistedDeclaration(); // Works: Output -> "I am a function declaration"
+function hoistedDeclaration() {
+    console.log("I am a function declaration");
+}
+
+// Function Expression is NOT hoisted (only variable is hoisted, not the function assignment)
+try {
+    hoistedExpression(); // Error: hoistedExpression is not a function
+} catch (e) {
+    console.log(e.message);
+}
+var hoistedExpression = function() {
+    console.log("I am a function expression");
+};
+hoistedExpression(); // Works after assignment: Output -> "I am a function expression"
+
+
+
+// practice function
+
+//1. What's the difference between function declaration and expression in terms of hoisting?
+
+//Ans= 
+// Function Declaration is hoisted completely (both name and body)
+// Function Expression is NOT hoisted (only variable is hoisted, not the function assignment)
+
+//2. Use rest parameter to accept any number of scores and return the total.
+
+let getScore = (...socres) => {
+   let total = 0;
+   socres.forEach(function(val){
+    total = total + val;
+   })
+}
+getScore( 2,4,5,8)
