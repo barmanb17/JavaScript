@@ -951,4 +951,166 @@ console.log(twenty(200));
 
 
 
+//Arrow vs Regular function
+
+// Arrow Function vs Regular Function (Summary):
+// - Arrow functions: shorter syntax, no own `this` or `arguments`, not usable as constructors.
+// - Regular functions: have their own `this` and `arguments`, can be constructors, suitable for methods.
+
+// ✅ Regular Function Example (has its own `this`)
+const person1 = {
+  name: "Alice",
+  greet: function () {
+    console.log("Hi, I'm " + this.name); // 'this' refers to person1
+  }
+};
+person1.greet(); // Output: Hi, I'm Alice
+
+// ❌ Arrow Function Example (does not bind its own `this`)
+const person2 = {
+  name: "Bob",
+  greet: () => {
+    console.log("Hi, I'm " + this.name); // 'this' is undefined or window/global
+  }
+};
+person2.greet(); // Output: Hi, I'm undefined
+
+// ✅ Arrow Function for simple logic
+const addd = (a, b) => a + b;
+console.log(add(3, 4)); // Output: 7
+
+// ✅ Regular Function can access `arguments`
+function showArgs() {
+  console.log(arguments);
+}
+showArgs(1, 2, 3); // Output: [1, 2, 3]
+
+// ❌ Arrow Function can't access `arguments`
+const showArrowArgs = () => {
+  // console.log(arguments); // Error: arguments is not defined
+};
+
+// ✅ Regular Function used as a constructor
+function Car(brand) {
+  this.brand = brand;
+}
+const myCar = new Car("Toyota");
+console.log(myCar.brand); // Output: Toyota
+
+// ❌ Arrow Function can't be used as a constructor
+// const CarArrow = (brand) => { this.brand = brand; }
+// const brokenCar = new CarArrow("Honda"); // Error: not a constructor
+
+
+
+// 🔁 Function Hoisting vs Temporal Dead Zone (TDZ)
+
+// ✅ Function Hoisting:
+// - Function declarations are hoisted: you can call them before they're defined in code.
+// - Only works with `function` keyword (not with function expressions or arrow functions).
+
+console.log(greet()); // Output: Hello!
+
+function greet() {
+  return "Hello!";
+}
+
+// ❌ Function expressions and arrow functions are NOT hoisted:
+try {
+  console.log(sayHi()); // ReferenceError: Cannot access 'sayHi' before initialization
+} catch (e) {
+  console.log(e.message);
+}
+
+const sayHii = function () {
+  return "Hi!";
+};
+
+// 🧠 TDZ (Temporal Dead Zone):
+// - A `let` or `const` variable is in the TDZ from the start of the block until it's initialized.
+// - Accessing it before declaration causes a ReferenceError.
+
+try {
+  console.log(a); // ❌ ReferenceError: Cannot access 'a' before initialization
+  let a = 10;
+} catch (e) {
+  console.log(e.message);
+}
+
+// ✅ var is hoisted and initialized as `undefined`
+console.log(b); // Output: undefined
+var b = 20;
+
+// ❗ Best Practice:
+// - Always declare variables at the top of their scope.
+// - Avoid using `var` to prevent confusion caused by hoisting.
+
+
+
+// 🔒 Closures & 🔁 Higher-Order Functions (HOFs)
+
+// ✅ CLOSURE:
+// A closure is created when a function "remembers" variables from its outer scope,
+// even after the outer function has finished executing.
+
+function outer() {
+  let count = 0;
+
+  return function inner() {
+    count++; // inner still has access to 'count'
+    console.log("Count is:", count);
+  };
+}
+
+const counterr = outer(); // outer is called once
+counter(); // Output: Count is: 1
+counter(); // Output: Count is: 2
+
+// 🔐 Closure allows the inner function to "close over" the 'count' variable,
+// keeping it private and persistent between calls.
+
+// Use Case: Data privacy, function factories, memoization, and more.
+
+
+// 🔁 HIGHER-ORDER FUNCTION (HOF):
+// A function that either:
+// 1. Takes one or more functions as arguments
+// 2. Returns a function
+
+// Example 1: HOF that returns a function (Discount calculator)
+function discountCalculator(discount) {
+  return function (price) {
+    return price - price * (discount / 100);
+  };
+}
+
+const tenPercentOff = discountCalculator(10);
+console.log(tenPercentOff(1000)); // Output: 900
+
+// Example 2: HOF that accepts a function as argument (Array map)
+const numberss = [1, 2, 3];
+const doubled = numbers.map(function (num) {
+  return num * 2;
+});
+console.log(doubled); // Output: [2, 4, 6]
+
+// Use Case: Reusability, abstraction, cleaner functional code (e.g., map, filter, reduce)
+
+
+// ✅ Summary:
+
+// 🔒 Closure:
+// - Inner function remembers variables from outer function even after it's gone.
+// - Creates private, persistent state.
+
+// 🔁 HOF:
+// - Accepts functions as arguments or returns functions.
+// - Used in functional programming for abstraction and reusability.
+
+
+
+
+
+
+//Arrays
 
