@@ -1300,4 +1300,348 @@ console.log(fruits)
 
 //inset "red" and "blue" at index 1 in this array.
 let color = ["green", "yellow"]
-color.splice(0, 0, "red", "yellow")
+color.splice(1, 0, "red", "yellow")
+
+//Extract only the middle 3 elements from this array.
+
+let items = [1,2,3,4,5]
+console.log(items.slice(1, 4))
+//.slice() does not change the original array. It returns a new array with the selected portion
+
+
+//Sort this array alphabatically and then reverse it.
+
+let names = ["zara", "arjun", "mira", "bhavya"];
+names.sort().reverse()
+
+//use .map() to square each number:
+let sqr = [1,2,3,4];
+console.log(sqr.map(function(num){
+    return num * 2;
+}))
+
+//use .filter() to keep numbers greater than 10:
+let grt = [5,12,8,20,3];
+
+console.log(grt.filter(function(num){
+    return num > 10;
+}))
+
+//use .reduct() to find the sum of this array:
+ let red = [10, 20, 30];
+
+ console.log(red.reduce(function(acc, val){
+    return acc + val
+ }, 0))
+
+ // use .find() to get the first number less than 10;
+ let num = [12, 15, 3,8, 20];
+
+let anss = num.find(function(val){
+    return val <10;
+})
+
+//Destructure this array to get firstName and lastName.
+let fullName =["harsh", "harshita"];
+let [firstName, lastName] = fullName;
+
+//merge two arrays using spread operator:
+let p = [1,2]
+let q = [3,4 ]
+
+let r = [...p, ...q];
+
+// Add "india" to the start of this array using spread operator
+let countries = ["usa", "uk"];
+countries = ["india", ...countries];
+
+console.log(countries); // Output: ['india', 'usa', 'uk']
+
+//clone this array properly (not by reference)
+let arrr = [1,2,3]
+let arrr2 = [...arrr];
+
+//slice vs splice
+// slice() creates a new array by extracting a portion of an existing array
+let sliced = arrr.slice(1, 3); // [2, 3]
+
+// splice() modifies the original array by removing or replacing elements
+arrr.splice(1, 1, 99); // [1, 99, 3]
+
+// map vs forEach
+
+// forEach: Executes a provided function once for each array element. It does not return a new array.
+// Use forEach when you want to perform side effects (like logging or updating external variables) for each element.
+const arrForEach = [1, 2, 3];
+arrForEach.forEach(function(val, idx) {
+    console.log(`forEach index ${idx}: ${val}`);
+});
+
+// map: Executes a provided function once for each array element and returns a new array with the results.
+// Use map when you want to transform each element and create a new array.
+const arrMap = [1, 2, 3];
+const doubledArr = arrMap.map(function(val) {
+    return val * 2;
+});
+console.log('map result:', doubledArr); // [2, 4, 6]
+
+// Summary:
+// - Use map when you need a new array based on the original.
+
+
+
+
+
+
+//Object
+
+// What is an object?
+// An object is a collection of key-value pairs, where keys (also called properties) are strings (or Symbols), and values can be any data type.
+// Objects are used to represent real-world entities and store related data and functionality together.
+
+// Creating objects -key value structure
+let person = {
+    name: "Vijay",
+    age: 25,
+    isStudent: true
+};
+
+// Accessing properties
+console.log(person.name); // Vijay
+console.log(person["age"]); // 25
+
+// Modifying properties
+person.age = 26;
+person["isStudent"] = false;
+
+// Adding new properties
+person.city = "Delhi";
+
+// Deleting properties
+delete person.isStudent;
+
+// Checking if a property exists
+console.log("name" in person); // true
+
+// Iterating over object properties
+for (let key in person) {
+    console.log(key, person[key]);
+}
+
+// Object methods (functions inside objects)
+let user = {
+    name: "Alice",
+    greet: function() {
+        return `Hello, ${this.name}!`;
+    }
+};
+console.log(user.greet()); // Hello, Alice!
+
+// Shorthand method syntax
+let car = {
+    brand: "Toyota",
+    start() {
+        console.log("Car started");
+    }
+};
+car.start();
+
+// Object destructuring
+const { namee, agee, cityy } = person;
+
+
+// Define an object with key-value pairs
+let obj = {
+    name: "harsh",
+    age: 26,
+    email: "test@test.com"
+};
+
+// Use a for...in loop to iterate over the object's keys
+for (let key in obj) {
+    // Print the key and its corresponding value
+    console.log(key, obj[key]);
+}
+
+// Object.keys: returns an array of the object's own property names (keys)
+console.log(Object.keys(obj)); // ["name", "age", "email"]
+console.log(Object.entries(obj)); // [["name", "harsh"], ["age", 26], ["email", "test@test.com"]]
+
+// 📌 Copying Objects in JavaScript
+
+/*
+1. Spread Operator (Shallow Copy)
+- Copies all enumerable own properties from one object to another.
+- Only creates a shallow copy (nested objects are still referenced).
+*/
+
+const originalObj = { a: 1, b: 2, nested: { c: 3 } };
+
+const copyWithSpread = { ...originalObj }; // Shallow copy
+
+copyWithSpread.a = 10;           // ✅ Only affects copyWithSpread.a
+copyWithSpread.nested.c = 99;    // ❌ Affects both originalObj and copy because nested is shared
+
+console.log("Spread:", originalObj, copyWithSpread);
+
+// Output:
+// Spread: { a: 1, b: 2, nested: { c: 99 } } 
+//         { a: 10, b: 2, nested: { c: 99 } }
+
+
+/*
+2. Object.assign() (Shallow Copy)
+- Copies properties from one or more source objects to a target object.
+- Also creates a shallow copy.
+*/
+
+const copyWithAssign = Object.assign({}, originalObj); // Shallow copy again
+
+copyWithAssign.b = 20;           // ✅ Only affects copyWithAssign.b
+copyWithAssign.nested.c = 100;   // ❌ Still affects originalObj.nested.c
+
+console.log("Assign:", originalObj, copyWithAssign);
+
+// Output:
+// Assign: { a: 1, b: 2, nested: { c: 100 } }
+//         { a: 1, b: 20, nested: { c: 100 } }
+
+
+/*
+3. Deep Clone (for nested objects)
+- Use JSON.parse(JSON.stringify(obj)) for deep cloning simple objects.
+- Does not support functions, undefined, dates, regex, etc.
+*/
+
+const deepCloned = JSON.parse(JSON.stringify(originalObj)); // Deep copy
+
+deepCloned.nested.c = 123;       // ✅ Does NOT affect originalObj
+
+console.log("Deep Clone:", originalObj, deepCloned);
+
+// Output:
+// Deep Clone: { a: 1, b: 2, nested: { c: 100 } }
+//             { a: 1, b: 2, nested: { c: 123 } }
+
+
+
+// Optional Chaining (?.)
+// Allows safe access to deeply nested properties without throwing an error if a property doesn't exist.
+
+let student = {
+    name: "Vijay",
+    address: {
+        city: "Delhi",
+        pin: 110001
+    }
+};
+
+console.log(student.address?.city); // "Delhi"
+console.log(student.contact?.phone); // undefined (no error thrown)
+
+// Optional chaining with function calls
+let userObj = {
+    greet() {
+        return "Hello!";
+    }
+};
+console.log(userObj.greet?.()); // "Hello!"
+console.log(userObj.sayBye?.()); // undefined
+
+// Computed Properties
+// Allows dynamic property names in objects using square brackets []
+
+let keyName = "email";
+let value = "vijay@example.com";
+
+let dynamicObj = {
+    [keyName]: value,
+    age: 25
+};
+console.log(dynamicObj); // { email: "vijay@example.com", age: 25 }
+
+// Example: Using computed properties in a function
+function createUser(key, val) {
+    return {
+        [key]: val,
+        createdAt: Date.now()
+    };
+}
+console.log(createUser("username", "vijay123"));
+
+
+
+//create an object for a student with name, age, and isEnrolled
+
+let studentt = {
+    name: "bijoy",
+    age: 25,
+    isEnrolled: true
+}
+
+//can an object key be a number or boolean? try this
+const obbj = {
+    true: "yes",
+    42: "answer",
+};
+console.log(obbj[42]);      // Output: "answer"
+console.log(obbj["true"]);  // Output: "yes"
+console.log(obbj.true);     // Output: "yes"
+
+//access the value of "first-name" from this object? 
+const userrr = {
+    "first-name": "harsh"
+};
+console.log(user["first-name"]);
+
+//given a dynamic key let key = "age", how will you access user[key] ?
+let key = "age";
+const uuser = {
+    age: 26
+}
+console.log(uuser[key])
+
+//from object below print the latitude:
+const location = {
+    cityyy: "nagaon",
+    coordinates: {
+        lat: 23.2,
+        lng: 77.7,
+    },
+};
+console.log(location.coordinates.lat);
+
+//What will happen if coordinates is missing how can you prevent errors?
+console.log(location?.coordinates?.lat)
+
+//destucture the city and lat from the location object above
+let {cityyy, coordinates:{lat}} = location;
+
+//destructure the key "first_name" as a value called firstName
+const usser = {
+    "first-name": "Harsh",
+};
+
+let {"first-name": firstNamee} = usser;
+
+//use for in loop to log all keys in this object
+const course = {
+    title: "js",
+    duration: "4 weeks",
+}
+for (let key in course){
+    console.log(key)
+}
+
+//use object.entries() to print all key value pairs as:
+//title: js
+//duration: 4 weeks
+const coourse = {
+    title: "js",
+    duration: "4 weeks"
+};
+
+Object.entries(coourse).forEach(function(val){
+    console.log(val[0] + ":" + val[1]);
+});
+
