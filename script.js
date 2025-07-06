@@ -10,8 +10,8 @@ console.log(y); // 20
 console.log(z); // 30
 z = 40; // reassigning z        
 console.log(z); // 40
-// const y = 50; // this will throw an error because y is a constant and cannot be reassigned
-// let x = 50; // this will throw an error because x is already declared in the same scope
+const yy = 50; // this will throw an error because y is a constant and cannot be reassigned
+let xx = 50; // this will throw an error because x is already declared in the same scope
 
 // //declaration and initialization
 // let a; // declaration
