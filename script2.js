@@ -37,3 +37,24 @@ function greet(greeting, name) {
 
 const greetHello = greet.myBind(null, "Hello");
 console.log(greetHello("Alice")); // "Hello, Alice"
+
+
+
+//promise sequence
+
+async function runInSequence(functions) {
+  let result = [];
+  for (let fn of functions) {
+    result.push(await fn());
+  }
+  return result;
+}
+
+// Example
+const asyncTasks = [
+  () => Promise.resolve(1),
+  () => new Promise(res => setTimeout(() => res(2), 1000)),
+  () => Promise.resolve(3),
+];
+
+runInSequence(asyncTasks).then(console.log); // [1, 2, 3]
