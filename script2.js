@@ -82,3 +82,36 @@ function throttle(fn, delay) {
     }
   };
 }
+
+
+
+//event emitter
+
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+
+  on(event, listener) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(listener);
+  }
+
+  off(event, listener) {
+    if (!this.events[event]) return;
+    this.events[event] = this.events[event].filter(l => l !== listener);
+  }
+
+  emit(event, ...args) {
+    if (!this.events[event]) return;
+    this.events[event].forEach(listener => listener(...args));
+  }
+}
+
+// Example
+const emitter = new EventEmitter();
+const log = msg => console.log(msg);
+
+emitter.on("message", log);
+emitter.emit("message", "Hello World!"); // "Hello World!"
+
