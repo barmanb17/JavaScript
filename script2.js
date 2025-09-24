@@ -115,3 +115,14 @@ const log = msg => console.log(msg);
 emitter.on("message", log);
 emitter.emit("message", "Hello World!"); // "Hello World!"
 
+
+//polyfill
+Array.prototype.myMap = function (callback, context) {
+  let result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) result.push(callback.call(context, this[i], i, this));
+  }
+  return result;
+};
+
+console.log([1, 2, 3].myMap(x => x * 2)); // [2, 4, 6]
