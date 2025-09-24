@@ -58,3 +58,27 @@ const asyncTasks = [
 ];
 
 runInSequence(asyncTasks).then(console.log); // [1, 2, 3]
+
+
+
+
+//debounce
+
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+function throttle(fn, delay) {
+  let last = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - last >= delay) {
+      fn.apply(this, args);
+      last = now;
+    }
+  };
+}
