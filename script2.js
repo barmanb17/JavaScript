@@ -204,3 +204,41 @@ const a = { x: 1, y: { z: 2 } };
 const b = deepClone(a);
 b.y.z = 100;
 console.log(a.y.z); // 2 (unchanged)
+
+
+//mini reactive system
+
+function reactive(obj) {
+  const deps = new Map();
+
+  return new Proxy(obj, {
+    get(target, prop) {
+      if (!deps.has(prop)) deps.set(prop, new Set());
+      if (activeEffect) deps.get(prop).add(activeEffect);
+      return Reflect.get(target, prop);
+    },
+    set(target, prop, value) {
+      const result = Reflect.set(target, prop, value);
+      if (deps.has(prop)) {
+        deps.get(prop).forEach(fn => fn());
+      }
+      return result;
+    }
+  });
+}
+
+let activeEffect = null;
+function watchEffect(effect) {
+  activeEffect = effect;
+  effect();
+  activeEffect = null;
+}
+
+// Example
+const state = reactive({ count: 0 });
+
+watchEffect(() => {
+  console.log("Count changed:", state.count);
+});
+
+state.count++; // logs: "Count changed: 1"
