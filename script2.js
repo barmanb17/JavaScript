@@ -22,3 +22,18 @@ const memoFib = memoize(fibonacci);
 console.log(memoFib(40)); // Much faster than plain fibonacci(40)
 
 
+//custom
+Function.prototype.myBind = function (context, ...args) {
+  const fn = this;
+  return function (...newArgs) {
+    return fn.apply(context, [...args, ...newArgs]);
+  };
+};
+
+// Example
+function greet(greeting, name) {
+  return `${greeting}, ${name}`;
+}
+
+const greetHello = greet.myBind(null, "Hello");
+console.log(greetHello("Alice")); // "Hello, Alice"
