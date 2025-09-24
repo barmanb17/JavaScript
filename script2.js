@@ -126,3 +126,35 @@ Array.prototype.myMap = function (callback, context) {
 };
 
 console.log([1, 2, 3].myMap(x => x * 2)); // [2, 4, 6]
+
+
+//lazy evaluation pipeline
+
+class LazyArray {
+  constructor(arr) {
+    this.arr = arr;
+    this.operations = [];
+  }
+
+  map(fn) {
+    this.operations.push(arr => arr.map(fn));
+    return this;
+  }
+
+  filter(fn) {
+    this.operations.push(arr => arr.filter(fn));
+    return this;
+  }
+
+  value() {
+    return this.operations.reduce((acc, fn) => fn(acc), this.arr);
+  }
+}
+
+// Example
+const result = new LazyArray([1, 2, 3, 4])
+  .map(x => x * 2)
+  .filter(x => x > 4)
+  .value();
+
+console.log(result); // [6, 8]
