@@ -158,3 +158,25 @@ const result = new LazyArray([1, 2, 3, 4])
   .value();
 
 console.log(result); // [6, 8]
+
+
+//retro with backoff
+
+async function retry(fn, retries = 3, delay = 500) {
+  try {
+    return await fn();
+  } catch (error) {
+    if (retries === 0) throw error;
+    await new Promise(res => setTimeout(res, delay));
+    return retry(fn, retries - 1, delay * 2);
+  }
+}
+
+// Example
+let count = 0;
+const unreliableTask = () => {
+  count++;
+  return count < 3 ? Promise.reject("Fail") : Promise.resolve("Success");
+};
+
+retry(unreliableTask, 5).then(console.log); // "Success"
