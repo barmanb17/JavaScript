@@ -180,3 +180,27 @@ const unreliableTask = () => {
 };
 
 retry(unreliableTask, 5).then(console.log); // "Success"
+
+
+//deep clone
+
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj === null || typeof obj !== "object") return obj;
+  if (hash.has(obj)) return hash.get(obj);
+
+  let clone = Array.isArray(obj) ? [] : {};
+  hash.set(obj, clone);
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      clone[key] = deepClone(obj[key], hash);
+    }
+  }
+  return clone;
+}
+
+// Example
+const a = { x: 1, y: { z: 2 } };
+const b = deepClone(a);
+b.y.z = 100;
+console.log(a.y.z); // 2 (unchanged)
