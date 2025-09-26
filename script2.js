@@ -242,3 +242,32 @@ watchEffect(() => {
 });
 
 state.count++; // logs: "Count changed: 1"
+
+
+//custom call and apply
+
+Function.prototype.myCall = function(context, ...args) {
+  if (typeof this !== 'function') throw new TypeError('Not callable');
+  context = context ?? globalThis;
+  const sym = Symbol();
+  context[sym] = this;
+  const result = context[sym](...args);
+  delete context[sym];
+  return result;
+};
+
+Function.prototype.myApply = function(context, args) {
+  if (typeof this !== 'function') throw new TypeError('Not callable');
+  context = context ?? globalThis;
+  const sym = Symbol();
+  context[sym] = this;
+  const result = context[sym](...(args || []));
+  delete context[sym];
+  return result;
+};
+
+// Example
+function hello(greeting, name) { return `${greeting}, ${name} from ${this.place}`; }
+const obj = { place: 'Earth' };
+console.log(hello.myCall(obj, 'Hi', 'Alice')); // "Hi, Alice from Earth"
+console.log(hello.myApply(obj, ['Hey', 'Bob'])); // "Hey, Bob from Earth"
