@@ -296,3 +296,41 @@ function promiseAll(promises) {
 promiseAll([Promise.resolve(1), 2, Promise.resolve(3)])
   .then(console.log) // [1,2,3]
   .catch(console.error);
+
+
+  //LRU cache
+
+  class LRUCache {
+  constructor(limit = 100) {
+    this.limit = limit;
+    this.map = new Map();
+  }
+
+  get(key) {
+    if (!this.map.has(key)) return undefined;
+    const val = this.map.get(key);
+    // move to newest (end)
+    this.map.delete(key);
+    this.map.set(key, val);
+    return val;
+  }
+
+  set(key, value) {
+    if (this.map.has(key)) this.map.delete(key);
+    else if (this.map.size >= this.limit) {
+      // remove oldest
+      const oldestKey = this.map.keys().next().value;
+      this.map.delete(oldestKey);
+    }
+    this.map.set(key, value);
+  }
+}
+
+// Example
+const lru = new LRUCache(2);
+lru.set('a', 1);
+lru.set('b', 2);
+lru.get('a');    // touch 'a' -> order: b, a
+lru.set('c', 3); // evict 'b'
+console.log(lru.get('b')); // undefined
+console.log(lru.get('a')); // 1
