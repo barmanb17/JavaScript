@@ -352,3 +352,16 @@ function myInstanceOf(obj, constructor) {
 // Example
 console.log(myInstanceOf([], Array)); // true
 console.log(myInstanceOf({}, Array)); // false
+
+
+//pipe and compose
+
+
+const pipe = (...fns) => (initial) => fns.reduce((v, f) => f(v), initial);
+const compose = (...fns) => (initial) => fns.reduceRight((v, f) => f(v), initial);
+
+// Example
+const add1 = x => x + 1;
+const times2 = x => x * 2;
+console.log(pipe(add1, times2)(3)); // (3+1)*2 = 8
+console.log(compose(add1, times2)(3)); // add1(times2(3)) = 7
