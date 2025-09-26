@@ -503,3 +503,28 @@ console.log(diff(a, b));
 // Example
 const iid = mySetInterval(() => console.log('tick'), 300);
 setTimeout(() => myClearInterval(iid), 1000); // stop after ~1s
+
+
+//flatten object
+
+
+function flatten(obj, prefix = '', res = {}) {
+  if (obj === null || typeof obj !== 'object' || obj instanceof Date) {
+    res[prefix] = obj;
+    return res;
+  }
+  if (Array.isArray(obj)) {
+    // decide representation for arrays: we will keep indices in keys
+    obj.forEach((v, i) => flatten(v, prefix ? `${prefix}.${i}` : `${i}`, res));
+  } else {
+    for (const key of Object.keys(obj)) {
+      const newKey = prefix ? `${prefix}.${key}` : key;
+      flatten(obj[key], newKey, res);
+    }
+  }
+  return res;
+}
+
+// Example
+console.log(flatten({ a: { b: { c: 1 }}, arr: [10, { x: 1 }] }));
+// { 'a.b.c': 1, 'arr.0': 10, 'arr.1.x': 1 }
