@@ -405,3 +405,62 @@ const q = new AsyncQueue();
 q.enqueue(() => new Promise(res => setTimeout(() => res(1), 500))).then(console.log);
 q.enqueue(() => new Promise(res => setTimeout(() => res(2), 100))).then(console.log);
 // logs 1 then 2 (sequentially)
+
+
+//virtual dom diff
+
+// VNode shape: { type: 'tag' | 'text', tag?, props?, children? }
+// For text nodes: { type: 'text', value: '...' }
+
+function diff(oldNode, newNode, path = []) {
+  const patches = [];
+
+  if (!oldNode) {
+    patches.push({ type: 'INSERT', path, node: newNode });
+    return patches;
+  }
+  if (!newNode) {
+    patches.push({ type: 'REMOVE', path });
+    return patches;
+  }
+
+  if (oldNode.type === 'text' && newNode.type === 'text') {
+    if (oldNode.value !== newNode.value) patches.push({ type: 'TEXT', path, value: newNode.value });
+    return patches;
+  }
+
+  if (oldNode.type !== newNode.type || oldNode.tag !== newNode.tag) {
+    patches.push({ type: 'REPLACE', path, node: newNode });
+    return patches;
+  }
+
+  // compare props shallowly
+  const propsPatches = {};
+  const allProps = new Set([...(oldNode.props ? Object.keys(oldNode.props) : []), ...(newNode.props ? Object.keys(newNode.props) : [])]);
+  allProps.forEach(key => {
+    const oldVal = (oldNode.props || {})[key];
+    const newVal = (newNode.props || {})[key];
+    if (oldVal !== newVal) propsPatches[key] = newVal;
+  });
+  if (Object.keys(propsPatches).length) patches.push({ type: 'PROPS', path, props: propsPatches });
+
+  // diff children by index
+  const maxLen = Math.max((oldNode.children || []).length, (newNode.children || []).length);
+  for (let i = 0; i < maxLen; i++) {
+    patches.push(...diff((oldNode.children || [])[i], (newNode.children || [])[i], path.concat(i)));
+  }
+
+  return patches;
+}
+
+// Example
+const aa = { type: 'tag', tag: 'div', props: { id: 'x' }, children: [{ type: 'text', value: 'Hi' }] };
+const bb = { type: 'tag', tag: 'div', props: { id: 'y' }, children: [{ type: 'text', value: 'Hello' }, { type: 'tag', tag: 'span', children: [{ type: 'text', value: '!' }] }] };
+console.log(diff(a, b));
+/* possible patches:
+[
+  { type: 'PROPS', path: [], props: { id: 'y' } },
+  { type: 'TEXT', path: [0], value: 'Hello' },
+  { type: 'INSERT', path: [1], node: { type: 'tag', tag: 'span', children: [...] } }
+]
+*/
