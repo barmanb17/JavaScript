@@ -334,3 +334,21 @@ lru.get('a');    // touch 'a' -> order: b, a
 lru.set('c', 3); // evict 'b'
 console.log(lru.get('b')); // undefined
 console.log(lru.get('a')); // 1
+
+
+//custom instance off
+
+function myInstanceOf(obj, constructor) {
+  if (typeof constructor !== 'function') throw new TypeError('Right-hand side must be callable');
+  let proto = Object.getPrototypeOf(obj);
+  const prototype = constructor.prototype;
+  while (proto !== null) {
+    if (proto === prototype) return true;
+    proto = Object.getPrototypeOf(proto);
+  }
+  return false;
+}
+
+// Example
+console.log(myInstanceOf([], Array)); // true
+console.log(myInstanceOf({}, Array)); // false
