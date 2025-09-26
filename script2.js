@@ -464,3 +464,42 @@ console.log(diff(a, b));
   { type: 'INSERT', path: [1], node: { type: 'tag', tag: 'span', children: [...] } }
 ]
 */
+
+
+//setInterval implemented with setTimeout
+
+
+(function() {
+  const timers = new Map();
+  let idCounter = 1;
+
+  function mySetInterval(fn, interval, ...args) {
+    const id = idCounter++;
+    let active = true;
+
+    const tick = async () => {
+      if (!active) return;
+      try { fn(...args); } finally {
+        if (active) timers.set(id, setTimeout(tick, interval));
+      }
+    };
+
+    timers.set(id, setTimeout(tick, interval));
+    // store a cancel token
+    timers.set(`cancel_${id}`, () => { active = false; clearTimeout(timers.get(id)); timers.delete(id); timers.delete(`cancel_${id}`); });
+    return id;
+  }
+
+  function myClearInterval(id) {
+    const cancel = timers.get(`cancel_${id}`);
+    if (typeof cancel === 'function') cancel();
+  }
+
+  // expose globally
+  globalThis.mySetInterval = mySetInterval;
+  globalThis.myClearInterval = myClearInterval;
+})();
+
+// Example
+const iid = mySetInterval(() => console.log('tick'), 300);
+setTimeout(() => myClearInterval(iid), 1000); // stop after ~1s
