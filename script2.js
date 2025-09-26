@@ -271,3 +271,28 @@ function hello(greeting, name) { return `${greeting}, ${name} from ${this.place}
 const obj = { place: 'Earth' };
 console.log(hello.myCall(obj, 'Hi', 'Alice')); // "Hi, Alice from Earth"
 console.log(hello.myApply(obj, ['Hey', 'Bob'])); // "Hey, Bob from Earth"
+
+
+//promise all
+
+function promiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    if (!Array.isArray(promises)) return reject(new TypeError('Iterable required'));
+    const results = [];
+    let completed = 0;
+    const total = promises.length;
+    if (total === 0) return resolve([]);
+    promises.forEach((p, i) => {
+      Promise.resolve(p).then(value => {
+        results[i] = value;
+        completed += 1;
+        if (completed === total) resolve(results);
+      }).catch(reject);
+    });
+  });
+}
+
+// Example
+promiseAll([Promise.resolve(1), 2, Promise.resolve(3)])
+  .then(console.log) // [1,2,3]
+  .catch(console.error);
