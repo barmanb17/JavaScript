@@ -365,3 +365,43 @@ const add1 = x => x + 1;
 const times2 = x => x * 2;
 console.log(pipe(add1, times2)(3)); // (3+1)*2 = 8
 console.log(compose(add1, times2)(3)); // add1(times2(3)) = 7
+
+
+//async queue
+
+class AsyncQueue {
+  constructor() {
+    this.queue = [];
+    this.running = false;
+  }
+
+  enqueue(task) {
+    // task : () => Promise
+    return new Promise((resolve, reject) => {
+      this.queue.push({ task, resolve, reject });
+      this.runNext();
+    });
+  }
+
+  async runNext() {
+    if (this.running) return;
+    const item = this.queue.shift();
+    if (!item) return;
+    this.running = true;
+    try {
+      const result = await item.task();
+      item.resolve(result);
+    } catch (err) {
+      item.reject(err);
+    } finally {
+      this.running = false;
+      this.runNext();
+    }
+  }
+}
+
+// Example
+const q = new AsyncQueue();
+q.enqueue(() => new Promise(res => setTimeout(() => res(1), 500))).then(console.log);
+q.enqueue(() => new Promise(res => setTimeout(() => res(2), 100))).then(console.log);
+// logs 1 then 2 (sequentially)
