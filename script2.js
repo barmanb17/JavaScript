@@ -528,3 +528,37 @@ function flatten(obj, prefix = '', res = {}) {
 // Example
 console.log(flatten({ a: { b: { c: 1 }}, arr: [10, { x: 1 }] }));
 // { 'a.b.c': 1, 'arr.0': 10, 'arr.1.x': 1 }
+
+
+
+//async runner
+
+function run(genFn) {
+  const gen = typeof genFn === 'function' ? genFn() : genFn;
+
+  return new Promise((resolve, reject) => {
+    function step(nextF, arg) {
+      let result;
+      try {
+        result = nextF.call(gen, arg);
+      } catch (err) {
+        return reject(err);
+      }
+      const { value, done } = result;
+      if (done) return resolve(value);
+      // support yielded promises or plain values
+      Promise.resolve(value).then(
+        val => step(gen.next, val),
+        err => step(gen.throw, err)
+      );
+    }
+    step(gen.next);
+  });
+}
+
+// Example: generator yields promises
+run(function* () {
+  const a = yield Promise.resolve(1);
+  const b = yield new Promise(res => setTimeout(() => res(2), 200));
+  return a + b;
+}).then(console.log); // 3
