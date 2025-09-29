@@ -562,3 +562,37 @@ run(function* () {
   const b = yield new Promise(res => setTimeout(() => res(2), 200));
   return a + b;
 }).then(console.log); // 3
+
+
+//range
+class Range {
+  constructor(start = 0, end = 0, step = 1) {
+    if (step === 0) throw new Error("step cannot be 0");
+    this.start = start;
+    this.end = end;
+    this.step = step;
+  }
+
+  [Symbol.iterator]() {
+    const start = this.start;
+    const end = this.end;
+    const step = this.step;
+    let current = start;
+    const increasing = step > 0;
+
+    return {
+      next() {
+        if ((increasing && current > end) || (!increasing && current < end)) {
+          return { done: true };
+        }
+        const value = current;
+        current += step;
+        return { value, done: false };
+      }
+    };
+  }
+}
+
+// Example
+for (const n of new Range(1, 5)) console.log(n); // 1 2 3 4 5
+for (const n of new Range(5, 1, -2)) console.log(n); // 5 3 1
