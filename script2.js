@@ -627,3 +627,41 @@ const person = createValidatedObject({}, {
 person.name = "Alice";
 person.age = 25;
 // person.age = 15; // throws TypeError
+
+
+//observer
+
+class Observable {
+  constructor() {
+    this.subscribers = new Set();
+  }
+
+  subscribe(fn) {
+    this.subscribers.add(fn);
+    return () => this.unsubscribe(fn); // return unsubscribe handle
+  }
+
+  unsubscribe(fn) {
+    this.subscribers.delete(fn);
+  }
+
+  notify(data) {
+    // copy to avoid mutation issues if subscriber list changes during notification
+    [...this.subscribers].forEach(fn => {
+      try {
+        fn(data);
+      } catch (err) {
+        // swallow or log subscriber errors so one bad subscriber won't break others
+        console.error('Subscriber error:', err);
+      }
+    });
+  }
+}
+
+// Example
+const obs = new Observable();
+const unsub = obs.subscribe(d => console.log('A got', d));
+obs.subscribe(d => console.log('B got', d));
+obs.notify('hello'); // A got hello  B got hello
+unsub(); 
+obs.notify('again'); // B got again
