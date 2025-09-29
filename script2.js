@@ -597,3 +597,33 @@ class Range {
 // Example
 for (const n of new Range(1, 5)) console.log(n); // 1 2 3 4 5
 for (const n of new Range(5, 1, -2)) console.log(n); // 5 3 1
+
+
+//proxy based validation
+
+function createValidatedObject(target = {}, schema = {}) {
+  return new Proxy(target, {
+    set(obj, prop, value) {
+      if (prop in schema) {
+        const validator = schema[prop];
+        const ok = validator(value);
+        if (!ok) throw new TypeError(`Validation failed for property "${String(prop)}"`);
+      }
+      obj[prop] = value;
+      return true;
+    },
+    get(obj, prop) {
+      return obj[prop];
+    }
+  });
+}
+
+// Example: enforce age >= 18 and name is non-empty string
+const person = createValidatedObject({}, {
+  age: v => Number.isInteger(v) && v >= 18,
+  name: v => typeof v === 'string' && v.trim().length > 0
+});
+
+person.name = "Alice";
+person.age = 25;
+// person.age = 15; // throws TypeError
