@@ -889,3 +889,15 @@ function deepFreeze(obj) {
 const config = deepFreeze({ a: 1, b: { c: 2 } });
 config.b.c = 10;
 console.log(config.b.c);
+
+
+//timeout promise
+
+function withTimeout(promise, ms) {
+  const timeout = new Promise((_, rej) => setTimeout(() => rej('timeout'), ms));
+  return Promise.race([promise, timeout]);
+}
+
+withTimeout(new Promise(res => setTimeout(() => res('done'), 1000)), 500)
+  .then(console.log)
+  .catch(console.error);
