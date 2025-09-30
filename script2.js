@@ -726,3 +726,16 @@ function throttle(fn, limit) {
 const loggg = throttle(x => console.log(x), 1000);
 setInterval(() => log(Date.now()), 200);
 //logs every second
+
+
+//curry
+
+function curry(fn) {
+  return function curried(...args) {
+    return args.length >= fn.length ? fn(...args) : (...next) => curried(...args, ...next);
+  };
+}
+
+const sum = (a, b, c) => a + b + c;
+const curriedSum = curry(sum);
+console.log(curriedSum(1)(2)(3));
