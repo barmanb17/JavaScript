@@ -692,3 +692,20 @@ const add = x => x + 2;
 const square = x => x * x;
 const resultt = compose(square, add)(5);
 console.log(result);
+
+
+//debounce
+
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+const logg = debounce(x => console.log(x), 500);
+log(1);
+log(2);
+setTimeout(() => log(3), 600);
+
