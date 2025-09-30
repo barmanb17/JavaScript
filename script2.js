@@ -665,3 +665,21 @@ obs.subscribe(d => console.log('B got', d));
 obs.notify('hello'); // A got hello  B got hello
 unsub(); 
 obs.notify('again'); // B got again
+
+
+//memoization utility
+
+function memoize(fn) {
+  const cache = new Map();
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+const slowFib = n => (n <= 1 ? n : slowFib(n - 1) + slowFib(n - 2));
+const fastFib = memoize(slowFib);
+console.log(fastFib(40));
