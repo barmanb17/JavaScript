@@ -709,3 +709,20 @@ log(1);
 log(2);
 setTimeout(() => log(3), 600);
 
+
+//throttle
+
+function throttle(fn, limit) {
+  let last = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - last >= limit) {
+      last = now;
+      fn(...args);
+    }
+  };
+}
+
+const loggg = throttle(x => console.log(x), 1000);
+setInterval(() => log(Date.now()), 200);
+//logs every second
