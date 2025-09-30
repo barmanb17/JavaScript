@@ -739,3 +739,21 @@ function curry(fn) {
 const sum = (a, b, c) => a + b + c;
 const curriedSum = curry(sum);
 console.log(curriedSum(1)(2)(3));
+
+
+
+
+//deep clone
+
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (hash.has(obj)) return hash.get(obj);
+  const copy = Array.isArray(obj) ? [] : {};
+  hash.set(obj, copy);
+  for (const key in obj) copy[key] = deepClone(obj[key], hash);
+  return copy;
+}
+
+const aaa = { x: 1, y: { z: 2 } };
+const b = deepClone(aaa);
+console.log(aaa !== b, aaa.y !== b.y);
