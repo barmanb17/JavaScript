@@ -757,3 +757,32 @@ function deepClone(obj, hash = new WeakMap()) {
 const aaa = { x: 1, y: { z: 2 } };
 const b = deepClone(aaa);
 console.log(aaa !== b, aaa.y !== b.y);
+
+
+//parallel promise executor
+
+function runParallel(tasks, limit) {
+  let i = 0, active = 0, results = [];
+  return new Promise((resolve, reject) => {
+    function runNext() {
+      if (i === tasks.length && active === 0) return resolve(results);
+      while (active < limit && i < tasks.length) {
+        const idx = i++;
+        active++;
+        tasks[idx]().then(r => {
+          results[idx] = r;
+          active--;
+          runNext();
+        }).catch(reject);
+      }
+    }
+    runNext();
+  });
+}
+
+const tasks = [
+  () => Promise.resolve(1),
+  () => new Promise(res => setTimeout(() => res(2), 200)),
+  () => Promise.resolve(3)
+];
+runParallel(tasks, 2).then(console.log);
