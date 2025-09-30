@@ -837,3 +837,13 @@ const double = async x => x * 2;
 const addOne = async x => x + 1;
 pipeline(3, double, addOne, double).then(console.log);
 
+
+//lazy evaluation with generators
+
+function* range(start, end, step = 1) {
+  for (let i = start; i <= end; i += step) yield i;
+}
+
+const nums = range(1, 10, 2);
+for (const n of nums) console.log(n);
+
