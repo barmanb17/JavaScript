@@ -901,3 +901,18 @@ function withTimeout(promise, ms) {
 withTimeout(new Promise(res => setTimeout(() => res('done'), 1000)), 500)
   .then(console.log)
   .catch(console.error);
+
+
+  //flatten nested object
+
+  function flatten(obj, prefix = '', res = {}) {
+  for (const k in obj) {
+    const key = prefix ? prefix + '.' + k : k;
+    if (typeof obj[k] === 'object' && obj[k] !== null) flatten(obj[k], key, res);
+    else res[key] = obj[k];
+  }
+  return res;
+}
+
+const nested = { a: { b: { c: 1 } }, d: 2 };
+console.log(flatten(nested));
