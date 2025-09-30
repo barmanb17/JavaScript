@@ -786,3 +786,25 @@ const tasks = [
   () => Promise.resolve(3)
 ];
 runParallel(tasks, 2).then(console.log);
+
+
+//retro promise
+
+function retry(fn, attempts) {
+  return new Promise((resolve, reject) => {
+    function attempt(n) {
+      fn().then(resolve).catch(err => {
+        if (n === 0) reject(err);
+        else attempt(n - 1);
+      });
+    }
+    attempt(attempts);
+  });
+}
+
+let countt = 0;
+retry(() => {
+  return new Promise((res, rej) => {
+    count++ < 2 ? rej('fail') : res('success');
+  });
+}, 3).then(console.log);
