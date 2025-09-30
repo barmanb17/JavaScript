@@ -876,3 +876,16 @@ console.log(lru.get(1));
 lru.put(3, 3);
 console.log(lru.get(2));
 
+//deep freeze
+
+function deepFreeze(obj) {
+  Object.freeze(obj);
+  Object.keys(obj).forEach(k => {
+    if (obj[k] && typeof obj[k] === 'object' && !Object.isFrozen(obj[k])) deepFreeze(obj[k]);
+  });
+  return obj;
+}
+
+const config = deepFreeze({ a: 1, b: { c: 2 } });
+config.b.c = 10;
+console.log(config.b.c);
