@@ -824,3 +824,16 @@ bus.on('msg', x => console.log('listener1', x));
 bus.on('msg', x => console.log('listener2', x));
 bus.emit('msg', 'hello');
 
+
+//pipeline (async)
+
+async function pipeline(x, ...fns) {
+  let res = x;
+  for (const fn of fns) res = await fn(res);
+  return res;
+}
+
+const double = async x => x * 2;
+const addOne = async x => x + 1;
+pipeline(3, double, addOne, double).then(console.log);
+
