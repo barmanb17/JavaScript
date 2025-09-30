@@ -683,3 +683,12 @@ function memoize(fn) {
 const slowFib = n => (n <= 1 ? n : slowFib(n - 1) + slowFib(n - 2));
 const fastFib = memoize(slowFib);
 console.log(fastFib(40));
+
+
+//function composition
+
+const composee = (...fns) => x => fns.reduceRight((v, fn) => fn(v), x);
+const add = x => x + 2;
+const square = x => x * x;
+const resultt = compose(square, add)(5);
+console.log(result);
