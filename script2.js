@@ -808,3 +808,19 @@ retry(() => {
     count++ < 2 ? rej('fail') : res('success');
   });
 }, 3).then(console.log);
+
+
+//event bus
+
+class EventBus {
+  constructor() { this.events = {}; }
+  on(e, fn) { (this.events[e] ||= []).push(fn); }
+  off(e, fn) { this.events[e] = (this.events[e] || []).filter(x => x !== fn); }
+  emit(e, ...args) { (this.events[e] || []).forEach(fn => fn(...args)); }
+}
+
+const bus = new EventBus();
+bus.on('msg', x => console.log('listener1', x));
+bus.on('msg', x => console.log('listener2', x));
+bus.emit('msg', 'hello');
+
