@@ -847,3 +847,32 @@ function* range(start, end, step = 1) {
 const nums = range(1, 10, 2);
 for (const n of nums) console.log(n);
 
+
+//lru cache
+
+class LRU {
+  constructor(limit) {
+    this.limit = limit;
+    this.cache = new Map();
+  }
+  get(key) {
+    if (!this.cache.has(key)) return -1;
+    const val = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key, val);
+    return val;
+  }
+  put(key, val) {
+    if (this.cache.has(key)) this.cache.delete(key);
+    else if (this.cache.size >= this.limit) this.cache.delete(this.cache.keys().next().value);
+    this.cache.set(key, val);
+  }
+}
+
+const lruu = new LRU(2);
+lru.put(1, 1);
+lru.put(2, 2);
+console.log(lru.get(1));
+lru.put(3, 3);
+console.log(lru.get(2));
+
