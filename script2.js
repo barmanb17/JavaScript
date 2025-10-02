@@ -931,3 +931,26 @@ function logger(fn) {
 
 const addd = logger((a, b) => a + b);
 add(2, 3);
+
+
+//async queue
+
+class AsyncQueue {
+  constructor() { this.queue = []; this.running = false; }
+  enqueue(task) {
+    this.queue.push(task);
+    if (!this.running) this.run();
+  }
+  async run() {
+    this.running = true;
+    while (this.queue.length) {
+      const task = this.queue.shift();
+      await task();
+    }
+    this.running = false;
+  }
+}
+
+const qq = new AsyncQueue();
+q.enqueue(() => new Promise(res => setTimeout(() => { console.log(1); res(); }, 300)));
+q.enqueue(() => new Promise(res => setTimeout(() => { console.log(2); res(); }, 100)));
