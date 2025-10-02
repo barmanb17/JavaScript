@@ -989,3 +989,21 @@ async function runParallel() {
 runSequential().then(console.log);
 runParallel().then(console.log);
 
+
+//function once
+
+function once(fn) {
+  let called = false, result;
+  return (...args) => {
+    if (!called) {
+      called = true;
+      result = fn(...args);
+    }
+    return result;
+  };
+}
+
+const init = once(() => console.log("Initialized"));
+init();
+init();
+
