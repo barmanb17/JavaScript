@@ -970,3 +970,22 @@ function reactive(obj, cb) {
 
 const statee = reactive({ count: 0 }, (k, v) => console.log(`${k} changed to ${v}`));
 state.count++;
+
+//parallel vs sequential promise execution
+
+const wait = ms => new Promise(r => setTimeout(r, ms, ms));
+
+async function runSequential() {
+  const a = await wait(500);
+  const b = await wait(300);
+  return a + b;
+}
+
+async function runParallel() {
+  const [a, b] = await Promise.all([wait(500), wait(300)]);
+  return a + b;
+}
+
+runSequential().then(console.log);
+runParallel().then(console.log);
+
