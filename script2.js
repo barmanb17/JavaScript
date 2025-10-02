@@ -954,3 +954,19 @@ class AsyncQueue {
 const qq = new AsyncQueue();
 q.enqueue(() => new Promise(res => setTimeout(() => { console.log(1); res(); }, 300)));
 q.enqueue(() => new Promise(res => setTimeout(() => { console.log(2); res(); }, 100)));
+
+
+//reactive proxy
+
+function reactive(obj, cb) {
+  return new Proxy(obj, {
+    set(target, key, val) {
+      target[key] = val;
+      cb(key, val);
+      return true;
+    }
+  });
+}
+
+const statee = reactive({ count: 0 }, (k, v) => console.log(`${k} changed to ${v}`));
+state.count++;
