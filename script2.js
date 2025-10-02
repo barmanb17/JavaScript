@@ -916,3 +916,18 @@ withTimeout(new Promise(res => setTimeout(() => res('done'), 1000)), 500)
 
 const nested = { a: { b: { c: 1 } }, d: 2 };
 console.log(flatten(nested));
+
+
+//decorator function
+
+function logger(fn) {
+  return (...args) => {
+    console.log(`Calling ${fn.name} with`, args);
+    const result = fn(...args);
+    console.log(`Result:`, result);
+    return result;
+  };
+}
+
+const addd = logger((a, b) => a + b);
+add(2, 3);
