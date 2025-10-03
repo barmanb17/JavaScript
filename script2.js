@@ -1021,3 +1021,29 @@ async function* streamNumbers(limit) {
   for await (const n of streamNumbers(5)) console.log(n);
 })();
 
+
+
+
+//task schedular with priority
+
+class Scheduler {
+  constructor() { this.queue = []; this.running = false; }
+  add(task, priority = 0) {
+    this.queue.push({ task, priority });
+    this.queue.sort((a, b) => b.priority - a.priority);
+    if (!this.running) this.run();
+  }
+  async run() {
+    this.running = true;
+    while (this.queue.length) {
+      const { task } = this.queue.shift();
+      await task();
+    }
+    this.running = false;
+  }
+}
+
+const s = new Scheduler();
+s.add(() => Promise.resolve(console.log("low")), 1);
+s.add(() => Promise.resolve(console.log("high")), 5);
+
