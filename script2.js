@@ -1047,3 +1047,27 @@ const s = new Scheduler();
 s.add(() => Promise.resolve(console.log("low")), 1);
 s.add(() => Promise.resolve(console.log("high")), 5);
 
+
+
+//proxy for api logger
+
+
+function apiLogger(api) {
+  return new Proxy(api, {
+    get(target, prop) {
+      return (...args) => {
+        console.log(`Calling ${prop} with`, args);
+        return target[prop](...args);
+      };
+    }
+  });
+}
+
+const api = apiLogger({
+  add: (a, b) => a + b,
+  mul: (a, b) => a * b
+});
+
+console.log(api.add(2, 3));
+console.log(api.mul(3, 4));
+
