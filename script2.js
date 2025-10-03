@@ -1007,3 +1007,17 @@ const init = once(() => console.log("Initialized"));
 init();
 init();
 
+
+//async generator
+
+async function* streamNumbers(limit) {
+  for (let i = 1; i <= limit; i++) {
+    await new Promise(r => setTimeout(r, 200));
+    yield i;
+  }
+}
+
+(async () => {
+  for await (const n of streamNumbers(5)) console.log(n);
+})();
+
