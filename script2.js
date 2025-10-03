@@ -1095,3 +1095,22 @@ const fn = compose([
 const ctx = { val: 1 };
 fn(ctx).then(() => console.log(ctx));
 
+
+//parallel map with async function
+
+async function parallelMap(arr, fn, limit) {
+  const results = [];
+  const executing = new Set();
+  for (const [i, val] of arr.entries()) {
+    const p = Promise.resolve().then(() => fn(val, i));
+    results[i] = p;
+    executing.add(p);
+    p.finally(() => executing.delete(p));
+    if (executing.size >= limit) await Promise.race(executing);
+  }
+  return Promise.all(results);
+}
+
+parallelMap([1,2,3,4,5], x => new Promise(r => setTimeout(() => r(x*2), 300)), 2)
+  .then(console.log);
+
