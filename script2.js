@@ -1071,3 +1071,27 @@ const api = apiLogger({
 console.log(api.add(2, 3));
 console.log(api.mul(3, 4));
 
+
+//custom middleware runner
+
+function compose(middlewares) {
+  return function (ctx) {
+    let i = -1;
+    function dispatch(index) {
+      if (index <= i) throw new Error("next called multiple times");
+      i = index;
+      const fn = middlewares[index];
+      if (fn) return fn(ctx, () => dispatch(index + 1));
+    }
+    return dispatch(0);
+  };
+}
+
+const fn = compose([
+  async (ctx, next) => { ctx.val++; await next(); ctx.val++; },
+  async (ctx, next) => { ctx.val *= 2; await next(); }
+]);
+
+const ctx = { val: 1 };
+fn(ctx).then(() => console.log(ctx));
+
