@@ -1242,3 +1242,6 @@ const pipeline = new Pipeline()
   .use(async ctx => ({ ...ctx, result: ctx.b + 5 }));
 
 pipeline.run({ input: 3 }).then(console.log);
+
+
+//deep diff
