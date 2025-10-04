@@ -1148,3 +1148,52 @@ effect(() => console.log("Count:", statew.count));
 statew.count++;
 statew.count++;
 
+//async task runner
+
+
+class TaskRunner {
+  constructor(limit = 2, retries = 2, timeout = 2000) {
+    this.limit = limit;
+    this.retries = retries;
+    this.timeout = timeout;
+    this.queue = [];
+    this.running = 0;
+  }
+  add(task) {
+    return new Promise((resolve, reject) => {
+      this.queue.push({ task, resolve, reject, attempts: 0 });
+      this.run();
+    });
+  }
+  async run() {
+    if (this.running >= this.limit || !this.queue.length) return;
+    const job = this.queue.shift();
+    this.running++;
+    try {
+      const res = await this.execute(job.task, job.attempts);
+      job.resolve(res);
+    } catch (err) {
+      job.reject(err);
+    } finally {
+      this.running--;
+      this.run();
+    }
+  }
+  async execute(task, attempts) {
+    try {
+      return await Promise.race([
+        task(),
+        new Promise((_, rej) => setTimeout(() => rej("timeout"), this.timeout))
+      ]);
+    } catch (err) {
+      if (attempts < this.retries) return this.execute(task, attempts + 1);
+      throw err;
+    }
+  }
+}
+
+const runner = new TaskRunner(2);
+const makeTask = (id, delay) => () => new Promise(res => setTimeout(() => res(id), delay));
+runner.add(makeTask(1, 500)).then(console.log);
+runner.add(makeTask(2, 100)).then(console.log);
+runner.add(makeTask(3, 700)).then(console.log);
