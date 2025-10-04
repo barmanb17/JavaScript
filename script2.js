@@ -1223,3 +1223,22 @@ pubsub.subscribe("user.*", data => console.log("Wildcard", data));
 pubsub.publish("user.login", { name: "Alice" });
 pubsub.publish("user.logout", { name: "Alice" });
 unsub();
+
+
+//dynamic pipe
+
+class Pipeline {
+  constructor() { this.steps = []; }
+  use(fn) { this.steps.push(fn); return this; }
+  async run(ctx) {
+    for (const step of this.steps) ctx = await step(ctx);
+    return ctx;
+  }
+}
+
+const pipeline = new Pipeline()
+  .use(async ctx => ({ ...ctx, a: ctx.input + 1 }))
+  .use(async ctx => ({ ...ctx, b: ctx.a * 2 }))
+  .use(async ctx => ({ ...ctx, result: ctx.b + 5 }));
+
+pipeline.run({ input: 3 }).then(console.log);
