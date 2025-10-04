@@ -1197,3 +1197,29 @@ const makeTask = (id, delay) => () => new Promise(res => setTimeout(() => res(id
 runner.add(makeTask(1, 500)).then(console.log);
 runner.add(makeTask(2, 100)).then(console.log);
 runner.add(makeTask(3, 700)).then(console.log);
+
+
+//mini pub
+
+class PubSub {
+  constructor() { this.events = {}; }
+  subscribe(event, handler) {
+    (this.events[event] ||= []).push(handler);
+    return () => this.unsubscribe(event, handler);
+  }
+  unsubscribe(event, handler) {
+    this.events[event] = (this.events[event] || []).filter(h => h !== handler);
+  }
+  publish(event, data) {
+    Object.keys(this.events)
+      .filter(e => e.startsWith(event))
+      .forEach(e => this.events[e].forEach(fn => fn(data)));
+  }
+}
+
+const pubsub = new PubSub();
+const unsubb = pubsub.subscribe("user.login", data => console.log("Login", data));
+pubsub.subscribe("user.*", data => console.log("Wildcard", data));
+pubsub.publish("user.login", { name: "Alice" });
+pubsub.publish("user.logout", { name: "Alice" });
+unsub();
