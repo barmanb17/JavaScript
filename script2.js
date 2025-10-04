@@ -1114,3 +1114,37 @@ async function parallelMap(arr, fn, limit) {
 parallelMap([1,2,3,4,5], x => new Promise(r => setTimeout(() => r(x*2), 300)), 2)
   .then(console.log);
 
+
+
+
+  //reactive store
+
+  function reactive(obj) {
+  const listeners = new Set();
+  const notify = () => listeners.forEach(fn => fn());
+  const proxy = new Proxy(obj, {
+    get(t, p) {
+      if (currentEffect) listeners.add(currentEffect);
+      return Reflect.get(t, p);
+    },
+    set(t, p, v) {
+      const res = Reflect.set(t, p, v);
+      notify();
+      return res;
+    }
+  });
+  return proxy;
+}
+
+let currentEffect = null;
+function effect(fn) {
+  currentEffect = fn;
+  fn();
+  currentEffect = null;
+}
+
+const statew = reactive({ count: 0 });
+effect(() => console.log("Count:", statew.count));
+statew.count++;
+statew.count++;
+
