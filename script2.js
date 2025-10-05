@@ -1255,3 +1255,25 @@ const asyncAdd = async x => x + 3;
 const squaree = x => x * x;
 
 pipeline(double, asyncAdd, square)(2).then(console.log);
+
+
+//dependency injector
+
+
+class Container {
+  constructor() { this.services = new Map(); }
+  register(name, factory) { this.services.set(name, factory); }
+  resolve(name) {
+    const factory = this.services.get(name);
+    if (!factory) throw new Error("Service not found: " + name);
+    return factory(this);
+  }
+}
+
+const c = new Container();
+c.register("config", () => ({ url: "https://api.com" }));
+c.register("api", c => ({
+  fetchData: () => Promise.resolve("Data from " + c.resolve("config").url)
+}));
+c.resolve("api").fetchData().then(console.log);
+
