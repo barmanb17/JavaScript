@@ -1298,3 +1298,36 @@ const stateee = { user: { name: "Alice", age: 22 } };
 console.log(view(nameLens, state));
 console.log(set(nameLens, "Bob", state));
 
+
+
+//simple actor model
+
+class Actor {
+  constructor(behavior) {
+    this.behavior = behavior;
+    this.queue = [];
+    this.processing = false;
+  }
+  send(msg) {
+    this.queue.push(msg);
+    if (!this.processing) this.run();
+  }
+  async run() {
+    this.processing = true;
+    while (this.queue.length) {
+      const msg = this.queue.shift();
+      await this.behavior(msg, this);
+    }
+    this.processing = false;
+  }
+}
+
+const counter = new Actor(async (msg, self) => {
+  if (msg.type === "inc") self.state = (self.state || 0) + 1;
+  if (msg.type === "log") console.log("Count:", self.state);
+});
+
+counter.send({ type: "inc" });
+counter.send({ type: "inc" });
+counter.send({ type: "log" });
+
