@@ -1331,3 +1331,31 @@ counter.send({ type: "inc" });
 counter.send({ type: "inc" });
 counter.send({ type: "log" });
 
+
+//promise pool
+
+async function promisePool(tasks, limit) {
+  const results = [];
+  const errors = [];
+  const executing = new Set();
+  for (const task of tasks) {
+    const p = Promise.resolve().then(task).then(
+      r => results.push(r),
+      e => errors.push(e)
+    );
+    executing.add(p);
+    p.finally(() => executing.delete(p));
+    if (executing.size >= limit) await Promise.race(executing);
+  }
+  await Promise.allSettled(executing);
+  return { results, errors };
+}
+
+const taskss = [
+  () => Promise.resolve("A"),
+  () => Promise.reject("B"),
+  () => new Promise(res => setTimeout(() => res("C"), 200))
+];
+
+promisePool(tasks, 2).then(console.log);
+
