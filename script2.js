@@ -1244,4 +1244,14 @@ const pipeline = new Pipeline()
 pipeline.run({ input: 3 }).then(console.log);
 
 
-//deep diff
+//functional pipeline
+
+
+const pipeline = (...fns) => input =>
+  fns.reduce((acc, fn) => (acc instanceof Promise ? acc.then(fn) : fn(acc)), input);
+
+const doublee = x => x * 2;
+const asyncAdd = async x => x + 3;
+const squaree = x => x * x;
+
+pipeline(double, asyncAdd, square)(2).then(console.log);
