@@ -1277,3 +1277,24 @@ c.register("api", c => ({
 }));
 c.resolve("api").fetchData().then(console.log);
 
+
+//lens utility
+
+
+const lens = (getter, setter) => ({
+  get: getter,
+  set: (val, obj) => setter(val, obj)
+});
+
+const view = (ln, obj) => ln.get(obj);
+const set = (ln, val, obj) => ln.set(val, obj);
+
+const nameLens = lens(
+  o => o.user.name,
+  (val, o) => ({ ...o, user: { ...o.user, name: val } })
+);
+
+const stateee = { user: { name: "Alice", age: 22 } };
+console.log(view(nameLens, state));
+console.log(set(nameLens, "Bob", state));
+
