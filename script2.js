@@ -1359,3 +1359,57 @@ const taskss = [
 
 promisePool(tasks, 2).then(console.log);
 
+
+
+const depsMap = new Map();
+
+function track(target, key) {
+  if (!activeEffect) return;
+  let deps = depsMap.get(key);
+  if (!deps) {
+    deps = new Set();
+    depsMap.set(key, deps);
+  }
+  deps.add(activeEffect);
+}
+
+function trigger(key) {
+  const deps = depsMap.get(key);
+  if (deps) deps.forEach(effect => effect());
+}
+
+// let activeEffect = null; // Removed redeclaration to avoid error
+function effect(fn) {
+  activeEffect = fn;
+  fn();
+  activeEffect = null;
+}
+
+function reactive(obj) {
+  return new Proxy(obj, {
+    get(target, key) {
+      track(target, key);
+      return Reflect.get(target, key);
+    },
+    set(target, key, value) {
+      const result = Reflect.set(target, key, value);
+      trigger(key);
+      return result;
+    }
+  });
+}
+
+// --- Usage ---
+const statet = reactive({ count: 0, double: 0 });
+
+effect(() => {
+  console.log(`Count: ${state.count}`);
+});
+
+effect(() => {
+  state.double = state.count * 2;
+  console.log(`Double updated: ${state.double}`);
+});
+
+state.count = 1;
+state.count = 2;
