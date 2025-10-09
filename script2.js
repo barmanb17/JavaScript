@@ -1437,3 +1437,17 @@ const greet = name => console.log(`Hello ${name}`);
 emitter.on('greet', greet);
 emitter.emit('greet', 'Bijoy');
 emitter.off('greet', greet);
+
+
+//function debouncer
+
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+const logDebounced = debounce(() => console.log('Typing stopped!'), 1000);
+logDebounced(); logDebounced(); logDebounced();
