@@ -680,9 +680,9 @@ function memoize(fn) {
   };
 }
 
-const slowFib = n => (n <= 1 ? n : slowFib(n - 1) + slowFib(n - 2));
-const fastFib = memoize(slowFib);
-console.log(fastFib(40));
+const slowFib1 = n => (n <= 1 ? n : slowFib1(n - 1) + slowFib1(n - 2));
+const fastFib1 = memoize(slowFib1);
+console.log(fastFib1(40));
 
 
 //function composition
@@ -1467,3 +1467,21 @@ function throttle(fn, limit) {
 
 const resize = throttle(() => console.log('Resizing...'), 2000);
 resize(); resize(); resize();
+
+
+//memoization utility
+
+function memoize(fn) {
+  const cache = new Map();
+  return (...args) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) return cache.get(key);
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+const slowFib2 = n => n < 2 ? n : slowFib2(n - 1) + slowFib2(n - 2);
+const fastFib2 = memoize(slowFib2);
+console.log(fastFib2(35));
