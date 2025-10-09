@@ -1532,3 +1532,23 @@ const user = { name: "Bijoy", info: { age: 23 } };
 const copy = deepClone(user);
 copy.info.age = 30;
 console.log(user.info.age); // 23
+
+
+//lazy promise chain
+
+
+class LazyPromise {
+  constructor(executor) { this.executor = executor; this.chain = []; }
+  then(fn) { this.chain.push(fn); return this; }
+  async run() {
+    let result = await this.executor();
+    for (const fn of this.chain) result = await fn(result);
+    return result;
+  }
+}
+
+new LazyPromise(() => Promise.resolve(2))
+  .then(x => x + 3)
+  .then(x => x * 4)
+  .run()
+  .then(console.log); // 20
