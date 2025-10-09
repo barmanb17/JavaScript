@@ -1451,3 +1451,19 @@ function debounce(fn, delay) {
 
 const logDebounced = debounce(() => console.log('Typing stopped!'), 1000);
 logDebounced(); logDebounced(); logDebounced();
+
+
+//function throttler
+function throttle(fn, limit) {
+  let lastCall = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      fn(...args);
+    }
+  };
+}
+
+const resize = throttle(() => console.log('Resizing...'), 2000);
+resize(); resize(); resize();
