@@ -1516,3 +1516,19 @@ for (let i = 1; i <= 5; i++) {
     setTimeout(() => { console.log(`Done ${i}`); res(); }, 1000);
   }));
 }
+
+//deep clone utility
+
+function deepClone(obj, hash = new WeakMap()) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (hash.has(obj)) return hash.get(obj);
+  const clone = Array.isArray(obj) ? [] : {};
+  hash.set(obj, clone);
+  for (const key in obj) clone[key] = deepClone(obj[key], hash);
+  return clone;
+}
+
+const user = { name: "Bijoy", info: { age: 23 } };
+const copy = deepClone(user);
+copy.info.age = 30;
+console.log(user.info.age); // 23
