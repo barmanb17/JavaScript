@@ -1485,3 +1485,34 @@ function memoize(fn) {
 const slowFib2 = n => n < 2 ? n : slowFib2(n - 1) + slowFib2(n - 2);
 const fastFib2 = memoize(slowFib2);
 console.log(fastFib2(35));
+
+
+//task queue
+
+class TaskQueue {
+  constructor(concurrency = 1) {
+    this.queue = [];
+    this.active = 0;
+    this.concurrency = concurrency;
+  }
+  enqueue(task) {
+    this.queue.push(task);
+    this.run();
+  }
+  async run() {
+    if (this.active >= this.concurrency || this.queue.length === 0) return;
+    const task = this.queue.shift();
+    this.active++;
+    await task();
+    this.active--;
+    this.run();
+  }
+}
+
+const queue = new TaskQueue(2);
+for (let i = 1; i <= 5; i++) {
+  queue.enqueue(() => new Promise(res => {
+    console.log(`Running ${i}`);
+    setTimeout(() => { console.log(`Done ${i}`); res(); }, 1000);
+  }));
+}
