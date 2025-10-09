@@ -1552,3 +1552,25 @@ new LazyPromise(() => Promise.resolve(2))
   .then(x => x * 4)
   .run()
   .then(console.log); // 20
+
+
+  //Retry Logic for Async Functions
+
+
+  async function retry(fn, retries = 3, delay = 500) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i === retries - 1) throw e;
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
+
+let attempt = 0;
+retry(() => {
+  attempt++;
+  if (attempt < 3) throw new Error('Fail');
+  return 'Success!';
+}).then(console.log);
