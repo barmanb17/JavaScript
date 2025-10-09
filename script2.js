@@ -1413,3 +1413,27 @@ effect(() => {
 
 state.count = 1;
 state.count = 2;
+
+
+
+//custom event emitter
+
+class EventEmitter {
+  constructor() { this.events = {}; }
+  on(event, listener) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(listener);
+  }
+  emit(event, ...args) {
+    if (this.events[event]) this.events[event].forEach(fn => fn(...args));
+  }
+  off(event, listener) {
+    if (this.events[event]) this.events[event] = this.events[event].filter(fn => fn !== listener);
+  }
+}
+
+const emitterr = new EventEmitter();
+const greet = name => console.log(`Hello ${name}`);
+emitter.on('greet', greet);
+emitter.emit('greet', 'Bijoy');
+emitter.off('greet', greet);
