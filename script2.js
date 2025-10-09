@@ -1602,3 +1602,23 @@ cache.set('a', 1); cache.set('b', 2);
 cache.get('a');
 cache.set('c', 3);
 console.log([...cache.cache.keys()]); // ['a', 'c']
+
+
+//Asynchronous Pipeline
+
+
+function pipeline(...fns) {
+  return async (input) => {
+    let result = input;
+    for (const fn of fns) result = await fn(result);
+    return result;
+  };
+}
+
+const process = pipeline(
+  async x => x + 1,
+  async x => x * 2,
+  async x => x - 3
+);
+
+process(5).then(console.log); // 9
