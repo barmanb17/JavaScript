@@ -1693,3 +1693,30 @@ container.register('Logger', Logger);
 container.register('UserService', UserService);
 const userService = container.resolve('UserService');
 userService.getUser();
+
+
+//custom async task
+
+async function runWithConcurrency(tasks, limit = 2) {
+  const results = [];
+  const executing = [];
+  for (const task of tasks) {
+    const p = Promise.resolve(task()).then(r => {
+      executing.splice(executing.indexOf(p), 1);
+      return r;
+    });
+    results.push(p);
+    executing.push(p);
+    if (executing.length >= limit) await Promise.race(executing);
+  }
+  return Promise.all(results);
+}
+
+const tasksk = Array.from({ length: 6 }, (_, i) => async () => {
+  console.log('Start', i);
+  await new Promise(r => setTimeout(r, 1000));
+  console.log('End', i);
+  return i;
+});
+
+runWithConcurrency(tasks, 3).then(console.log);
