@@ -1670,3 +1670,26 @@ class MyPromise {
 new MyPromise(res => setTimeout(() => res(10), 1000))
   .then(v => v * 2)
   .then(console.log); // 20 after 1s
+
+
+  //dependency injection
+
+  class Container {
+  constructor() { this.services = new Map(); }
+  register(name, constructor) { this.services.set(name, constructor); }
+  resolve(name) {
+    const constructor = this.services.get(name);
+    const dependencies = Reflect.getMetadata('design:paramtypes', constructor) || [];
+    const instances = dependencies.map(dep => this.resolve(dep.name));
+    return new constructor(...instances);
+  }
+}
+
+class Logger { log(msg) { console.log('LOG:', msg); } }
+class UserService { constructor(logger) { this.logger = logger; } getUser() { this.logger.log('User loaded'); } }
+
+const container = new Container();
+container.register('Logger', Logger);
+container.register('UserService', UserService);
+const userService = container.resolve('UserService');
+userService.getUser();
