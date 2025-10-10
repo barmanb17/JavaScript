@@ -1622,3 +1622,51 @@ const process = pipeline(
 );
 
 process(5).then(console.log); // 9
+
+
+//custom promise
+
+class MyPromise {
+  constructor(executor) {
+    this.state = 'pending';
+    this.value = undefined;
+    this.callbacks = [];
+
+    const resolve = (value) => {
+      if (this.state === 'pending') {
+        this.state = 'fulfilled';
+        this.value = value;
+        this.callbacks.forEach(cb => cb(value));
+      }
+    };
+
+    const reject = (reason) => {
+      if (this.state === 'pending') {
+        this.state = 'rejected';
+        this.value = reason;
+      }
+    };
+
+    try {
+      executor(resolve, reject);
+    } catch (err) {
+      reject(err);
+    }
+  }
+
+  then(onFulfilled) {
+    return new MyPromise((resolve) => {
+      const handle = (value) => {
+        const result = onFulfilled ? onFulfilled(value) : value;
+        resolve(result);
+      };
+      if (this.state === 'fulfilled') handle(this.value);
+      else this.callbacks.push(handle);
+    });
+  }
+}
+
+// Usage
+new MyPromise(res => setTimeout(() => res(10), 1000))
+  .then(v => v * 2)
+  .then(console.log); // 20 after 1s
