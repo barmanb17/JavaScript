@@ -1720,3 +1720,37 @@ const tasksk = Array.from({ length: 6 }, (_, i) => async () => {
 });
 
 runWithConcurrency(tasks, 3).then(console.log);
+
+
+//reactive computed properties
+
+let activeEffects;
+const deps = new Map();
+
+function effect(fn) {
+  activeEffect = fn;
+  fn();
+  activeEffect = null;
+}
+
+function reactive(obj) {
+  return new Proxy(obj, {
+    get(target, key) {
+      if (activeEffect) {
+        if (!deps.has(key)) deps.set(key, new Set());
+        deps.get(key).add(activeEffect);
+      }
+      return target[key];
+    },
+    set(target, key, value) {
+      target[key] = value;
+      if (deps.has(key)) deps.get(key).forEach(fn => fn());
+      return true;
+    }
+  });
+}
+
+const state = reactive({ count: 1 });
+let doubleee;
+effect(() => { double = state.count * 2; console.log('Double:', double); });
+state.count = 3;
