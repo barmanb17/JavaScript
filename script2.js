@@ -1874,3 +1874,40 @@ scheduler.addTask(3, async () => console.log("High Priority"));
 scheduler.addTask(2, async () => console.log("Medium Priority"));
 
 scheduler.run();
+
+
+//custom usestack hook
+
+let currentComponent = null;
+
+function useState(initialValue) {
+  const comp = currentComponent;
+  const index = comp.stateIndex++;
+  if (comp.states[index] === undefined) comp.states[index] = initialValue;
+  const setState = (newValue) => {
+    comp.states[index] = newValue;
+    comp.render();
+  };
+  return [comp.states[index], setState];
+}
+
+function createComponent(renderFn) {
+  return {
+    states: [],
+    stateIndex: 0,
+    render() {
+      this.stateIndex = 0;
+      currentComponent = this;
+      renderFn();
+      currentComponent = null;
+    },
+  };
+}
+
+// Example Usage
+const App = createComponent(() => {
+  const [count, setCount] = useState(0);
+  console.log("Rendered count:", count);
+  if (count < 3) setTimeout(() => setCount(count + 1), 1000);
+});
+App.render();
