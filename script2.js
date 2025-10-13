@@ -1911,3 +1911,31 @@ const App = createComponent(() => {
   if (count < 3) setTimeout(() => setCount(count + 1), 1000);
 });
 App.render();
+
+
+//lightweight reactive store
+
+
+class Store {
+  constructor(initialState) {
+    this.state = new Proxy(initialState, {
+      set: (target, key, value) => {
+        target[key] = value;
+        this.subscribers.forEach(fn => fn(this.state));
+        return true;
+      }
+    });
+    this.subscribers = [];
+  }
+
+  subscribe(fn) {
+    this.subscribers.push(fn);
+  }
+}
+
+const store = new Store({ count: 0 });
+
+store.subscribe(state => console.log("State changed:", state.count));
+
+store.state.count++;
+store.state.count++;
