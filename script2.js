@@ -1840,3 +1840,37 @@ di.register("userService", UserService, ["logger"]);
 
 const userServicee = di.get("userService");
 userService.loadUser();
+
+
+//implementing a scheduler with priority
+
+
+class Scheduler {
+  constructor() {
+    this.queue = [];
+    this.running = false;
+  }
+
+  addTask(priority, fn) {
+    this.queue.push({ priority, fn });
+    this.queue.sort((a, b) => b.priority - a.priority);
+  }
+
+  async run() {
+    if (this.running) return;
+    this.running = true;
+    while (this.queue.length) {
+      const task = this.queue.shift();
+      await task.fn();
+    }
+    this.running = false;
+  }
+}
+
+const scheduler = new Scheduler();
+
+scheduler.addTask(1, async () => console.log("Low Priority"));
+scheduler.addTask(3, async () => console.log("High Priority"));
+scheduler.addTask(2, async () => console.log("Medium Priority"));
+
+scheduler.run();
