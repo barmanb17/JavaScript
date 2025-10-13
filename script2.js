@@ -1913,8 +1913,32 @@ const App = createComponent(() => {
 App.render();
 
 
-//lightweight reactive store
+// //lightweight reactive store
 
+
+// class Store {
+//   constructor(initialState) {
+//     this.state = new Proxy(initialState, {
+//       set: (target, key, value) => {
+//         target[key] = value;
+//         this.subscribers.forEach(fn => fn(this.state));
+//         return true;
+//       }
+//     });
+//     this.subscribers = [];
+//   }
+
+//   subscribe(fn) {
+//     this.subscribers.push(fn);
+//   }
+// }
+
+// const store = new Store({ count: 0 });
+
+// store.subscribe(state => console.log("State changed:", state.count));
+
+// store.state.count++;
+// store.state.count++;
 
 class Store {
   constructor(initialState) {
@@ -1939,3 +1963,4 @@ store.subscribe(state => console.log("State changed:", state.count));
 
 store.state.count++;
 store.state.count++;
+
