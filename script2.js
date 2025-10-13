@@ -1798,3 +1798,45 @@ loop.queueMacroTask(() => console.log("Macrotask 2"));
 loop.queueMicroTask(() => console.log("Microtask 2"));
 
 loop.run();
+
+
+//DI container
+
+class Container {
+  constructor() {
+    this.registry = new Map();
+  }
+
+  register(name, definition, dependencies) {
+    this.registry.set(name, { definition, dependencies });
+  }
+
+  get(name) {
+    const target = this.registry.get(name);
+    if (!target.instance) {
+      const deps = target.dependencies.map(dep => this.get(dep));
+      target.instance = new target.definition(...deps);
+    }
+    return target.instance;
+  }
+}
+
+class Logger {
+  log(msg) { console.log(`[LOG]: ${msg}`); }
+}
+
+class UserService {
+  constructor(logger) {
+    this.logger = logger;
+  }
+  loadUser() {
+    this.logger.log("User loaded.");
+  }
+}
+
+const di = new Container();
+di.register("logger", Logger, []);
+di.register("userService", UserService, ["logger"]);
+
+const userServicee = di.get("userService");
+userService.loadUser();
