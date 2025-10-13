@@ -1754,3 +1754,47 @@ const state = reactive({ count: 1 });
 let doubleee;
 effect(() => { double = state.count * 2; console.log('Double:', double); });
 state.count = 3;
+
+
+//event loop
+
+class EventLoop {
+  constructor() {
+    this.microTasks = [];
+    this.macroTasks = [];
+    this.running = false;
+  }
+
+  queueMicroTask(task) {
+    this.microTasks.push(task);
+  }
+
+  queueMacroTask(task) {
+    this.macroTasks.push(task);
+  }
+
+  async run() {
+    if (this.running) return;
+    this.running = true;
+    while (this.microTasks.length || this.macroTasks.length) {
+      while (this.microTasks.length) {
+        const task = this.microTasks.shift();
+        await task();
+      }
+      if (this.macroTasks.length) {
+        const task = this.macroTasks.shift();
+        await task();
+      }
+    }
+    this.running = false;
+  }
+}
+
+const loop = new EventLoop();
+
+loop.queueMacroTask(() => console.log("Macrotask 1"));
+loop.queueMicroTask(() => console.log("Microtask 1"));
+loop.queueMacroTask(() => console.log("Macrotask 2"));
+loop.queueMicroTask(() => console.log("Microtask 2"));
+
+loop.run();
