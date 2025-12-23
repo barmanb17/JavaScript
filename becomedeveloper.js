@@ -50,3 +50,26 @@
 
 // let buttoons = document.querySelectorAll(".buy-now")
 
+
+//t1. Select the heading of a page by ID and change its text to "Welcome to the developer mode".
+
+// let heading = document.getElementById("heading");
+
+// heading.innerText = "Welcome to the developer mode";
+
+
+// Select all <li> elements and print their text using a loop.
+
+// let lis = document.querySelectorAll("li");
+
+// for (let i = 1; i < lis.length; i++) {
+//     console.log(lis[i].innerText);
+// }
+
+
+//What is the difference between innerText , textContent and innerHTML ?
+//ans- innerText returns the visible text content of an element, taking into account CSS styles. textContent returns the full text content of an element, including hidden text. innerHTML returns the HTML content of an element as a string, including any child elements and tags.
+
+
+//When should you use textContent over innerText ?
+//ans- textContent should be used when you want to get or set the full text content of an element, regardless of its visibility or CSS styles. It is also faster than innerText as it does not trigger a reflow of the layout.
