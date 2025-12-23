@@ -1955,7 +1955,6 @@ class Store {
   subscribe(fn) {
     this.subscribers.push(fn);
   }
-}
 
 const store = new Store({ count: 0 });
 
