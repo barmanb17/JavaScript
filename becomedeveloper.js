@@ -154,4 +154,7 @@ let inputs = document.querySelectorAll("input")
 
 form.addEventListener("submit", function(e) {
    e.preventDefault();
+
+   let card = document.createElement("div")
+   card.classList.add("card")
 })
