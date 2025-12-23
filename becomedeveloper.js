@@ -252,3 +252,27 @@
 //    div.style.top = e.clientY + "px";
 //    div.style.left = e.clientX + "px"
 // })
+
+
+
+
+//event bubbling
+//ans- jispe event aayega agar uspar listener nahi hua toh humaara event uske parent par listener dhundhega aur aisa karte karte upar ki taraf move karega.
+
+
+//event capturing
+//ans-ulta of event bubbling --from parent to children irrespective of chale toh phir bhi jayega  
+
+//jab bhi aap chick karte ho ya event raise karte ho toh aapka jo event flow hain wo do phases main chalta hain 
+//phase1: event top level element se neeche ki taraf aayege
+//phase2: event raised element se parent ki taraf aayega
+
+
+//aur pehle phase 1 hoti hain
+
+let inp = document.querySelector("input");
+let span = document.querySelector("span");
+
+inp.addEventListener("input", function(){
+   span.textContent = 20 - inp.value.length
+})
