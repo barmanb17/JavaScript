@@ -1,18 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            max-width: 150px;
+
+
+        }
+
+
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 20px;
+            border: 1px solid #555;
+        }
+
+        .profile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
 </head>
+
 <body>
-    <ul>
-        <li>apple</li>
-        <li>apple 2</li>
-        <li>apple 3</li>
-        <li>apple 4</li>
-        <li>apple 5</li>
-    </ul>
+
+    <form action="" class="form">
+        <input type="text" placeholder="Profile Pic">
+        <input type="text" placeholder="Enter Name">
+        <input type="text" placeholder="Enter Age">
+        <input type="text" placeholder="Enter Bio">
+        <input type="submit">
+    </form>
+
+    <div class="card">
+        <div class="profile">
+            <img src="https://images.unsplash.com/photo-1761839271800-f44070ff0eb9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+        </div>
+        <h3>Bijoy Barman</h3>
+        <h5>Creative Coder</h5>
+        <p>I am a self taught full stack developer</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="becomedeveloper.js"></script>
 </body>
+
 </html>

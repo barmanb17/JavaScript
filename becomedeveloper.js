@@ -73,3 +73,85 @@
 
 //When should you use textContent over innerText ?
 //ans- textContent should be used when you want to get or set the full text content of an element, regardless of its visibility or CSS styles. It is also faster than innerText as it does not trigger a reflow of the layout.
+
+
+
+
+//Event listeners and events handling
+
+//what are event listeners in javascript ?
+//ans- event listeners are functions that wait for a specific event to occur on a particular element and then execute a callback function in response to that event.
+
+//what is call back function ?
+//ans- a callback function is a function that is passed as an argument to another function and is executed after a certain event or condition is met.
+
+
+// let h1 = document.querySelector("h1");
+
+// h1.addEventListener("click", function() {
+//     h1.style.color = "blue";
+// })
+
+// let p = document.querySelector("p");
+
+// function dblclick() {
+//     p.style.color = "green";
+// }
+
+// p.addEventListener("dblclick", dblclick);
+// p.removeEventListener("dblclick", dblclick);
+
+
+// let p = document.querySelector("p");
+
+// p.addEventListener("click", function() {
+//     p.style.color = "red";
+// }   )
+
+// let input = document.querySelector("input");
+
+// input.addEventListener("input", function(inp) {
+//     if(inp.data !== null ) {
+//         console.log(inp.data)
+//     }
+// })
+
+//what is change event in javascript ?
+//ans- change event in javascript is an event that is triggered when the value of an input element, such as a text field or a select dropdown, is changed and the element loses focus.
+
+// let select = document.querySelector("select");
+//  let head = document.getElementById("head");
+
+//  select.addEventListener("change", function(dets) {
+//     head.textContent = "Device selected: " + dets.target.value;
+//  })
+// let h1 = document.querySelector("h1")
+
+// window.addEventListener("keydown", function(dets) {
+//    if(dets.key === " ") {
+//       h1.textContent = "SPC";
+//    } else {
+//       h1.textContent = dets.key;
+//    }
+// })
+
+
+// let btn = document.querySelector("#btn")
+// let input = document.querySelector("input")
+
+// btn.addEventListener("click", function(){
+//    input.click();
+// })
+
+// input.addEventListener("change", function(text) {
+//    btn.textContent = text.target.files[0].name
+// })
+
+
+
+let form = document.querySelector("form")
+let inputs = document.querySelectorAll("input")
+
+form.addEventListener("submit", function(e) {
+   e.preventDefault();
+})
