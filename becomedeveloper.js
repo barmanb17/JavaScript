@@ -270,9 +270,28 @@
 
 //aur pehle phase 1 hoti hain
 
-let inp = document.querySelector("input");
-let span = document.querySelector("span");
+// let inp = document.querySelector("input");
+// let span = document.querySelector("span");
 
-inp.addEventListener("input", function(){
-   span.textContent = 20 - inp.value.length
-})
+// inp.addEventListener("input", function(){
+//    span.textContent = 20 - inp.value.length
+// })
+
+
+
+//form validation
+
+
+// let form = document.querySelector("form")
+// let small = document.querySelector("small")
+// let nm = document.querySelector("#name")
+
+// form.addEventListener("submit", function(e) {
+//    e.preventDefault();
+
+//    if(nm.value.length <= 2) {
+//       small.style.display = "block"
+//    } else {
+//       small.style.display = "none"
+//    }
+// })
