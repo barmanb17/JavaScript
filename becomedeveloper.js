@@ -295,3 +295,37 @@
 //       small.style.display = "none"
 //    }
 // })
+
+
+
+//email password validator
+//htnl= emailpasswordvalidator.html
+
+let form = document.querySelector("form");
+let email = document.querySelector("#email");
+let password = document.querySelector("#password");
+
+
+form.addEventListener("submit", function (e) {
+   e.preventDefault();
+
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+   let emailAns = emailRegex.test(email.value);
+   let passwordAns = passwordRegex.test(password.value);
+
+   let isValid = true;
+
+   if (!emailAns) {
+      document.querySelector("#emerr").style.display = "block"
+      isValid = false;
+   } if (!passwordAns) {
+      document.querySelector("#pwerr").style.display = "block"
+      isValid = false;
+   }
+
+   if(isValid) {
+      document.querySelector("#resultMessage").textContent = "Login successfully"
+   }
+})
