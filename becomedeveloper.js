@@ -371,3 +371,24 @@
 //      document.querySelector("#alert").style.display = "none"
 //   }, 3000);
 
+
+
+
+
+
+
+//local storage - browser ke ander data store karna jo ki browser band karnepar bhi data stored rahega- only strings store kar sakte hain isliye awr other chijo ke liye JSON.stringify use karte hain taki sab chizoko string bana de. awr        json.parse for string to original form to fetch data
+
+//session storage - yea hamara data temporary store karta hain matlab ki tab band hua aur data gaya ~5mb
+
+//cookies - yea bhi data store karta hain jo ki browser ke cookie naam ki property mein save hota hain and yea cookie concept kam data ya light data ke liye hota hain ~ 4kb - cookies mein jo bhi data store karoge wo data page reload par automatically server par jayega.
+
+
+//local storage
+
+// localStorage.setItem("name", "developer")
+
+// let val = localStorage.setItem("name");
+
+// let con = sessionStorage.setItem("bijoy", "developer")
+

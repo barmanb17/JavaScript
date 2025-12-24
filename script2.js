@@ -1940,26 +1940,26 @@ App.render();
 // store.state.count++;
 // store.state.count++;
 
-class Store {
-  constructor(initialState) {
-    this.state = new Proxy(initialState, {
-      set: (target, key, value) => {
-        target[key] = value;
-        this.subscribers.forEach(fn => fn(this.state));
-        return true;
-      }
-    });
-    this.subscribers = [];
-  }
+// class Store {
+//   constructor(initialState) {
+//     this.state = new Proxy(initialState, {
+//       set: (target, key, value) => {
+//         target[key] = value;
+//         this.subscribers.forEach(fn => fn(this.state));
+//         return true;
+//       }
+//     });
+//     this.subscribers = [];
+//   }
 
-  subscribe(fn) {
-    this.subscribers.push(fn);
-  }
+//   subscribe(fn) {
+//     this.subscribers.push(fn);
+//   }
 
-const store = new Store({ count: 0 });
+// const store = new Store({ count: 0 });
 
-store.subscribe(state => console.log("State changed:", state.count));
+// store.subscribe(state => console.log("State changed:", state.count));
 
-store.state.count++;
-store.state.count++;
+// store.state.count++;
+// store.state.count++;
 
