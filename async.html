@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Download Progress Bar</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f4f6f8;
+    }
+
+    .card {
+      width: 360px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 14px;
+      background: #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      
+    }
+
+    .percentage {
+      margin-top: 8px;
+      font-size: 14px;
+      text-align: right;
+      color: #333;
+    }
+
+    @keyframes download {
+      from {
+        width: 0%;
+      }
+      to {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h3>Downloading File...</h3>
+
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+
+    <div class="percentage">0%</div>
+
+  </div>
+
+  <div id="alert">
+    hang on the file is downloading
+  </div>
+<script src="becomedeveloper.js"></script>
+</body>
+</html>

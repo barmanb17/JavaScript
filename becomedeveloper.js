@@ -301,31 +301,73 @@
 //email password validator
 //htnl= emailpasswordvalidator.html
 
-let form = document.querySelector("form");
-let email = document.querySelector("#email");
-let password = document.querySelector("#password");
+// let form = document.querySelector("form");
+// let email = document.querySelector("#email");
+// let password = document.querySelector("#password");
 
 
-form.addEventListener("submit", function (e) {
-   e.preventDefault();
+// form.addEventListener("submit", function (e) {
+//    e.preventDefault();
 
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+//    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+//    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-   let emailAns = emailRegex.test(email.value);
-   let passwordAns = passwordRegex.test(password.value);
+//    let emailAns = emailRegex.test(email.value);
+//    let passwordAns = passwordRegex.test(password.value);
 
-   let isValid = true;
+//    let isValid = true;
 
-   if (!emailAns) {
-      document.querySelector("#emerr").style.display = "block"
-      isValid = false;
-   } if (!passwordAns) {
-      document.querySelector("#pwerr").style.display = "block"
-      isValid = false;
-   }
+//    if (!emailAns) {
+//       document.querySelector("#emerr").style.display = "block"
+//       isValid = false;
+//    } if (!passwordAns) {
+//       document.querySelector("#pwerr").style.display = "block"
+//       isValid = false;
+//    }
 
-   if(isValid) {
-      document.querySelector("#resultMessage").textContent = "Login successfully"
-   }
-})
+//    if(isValid) {
+//       document.querySelector("#resultMessage").textContent = "Login successfully"
+//    }
+// })
+
+//set tiemout set interval
+
+// let count = 10;
+
+// let interval = setInterval(() => {
+//    if (count >= 1) {
+    
+//       console.log(count);
+//         count --;
+//    } else clearInterval(interval);
+// }, 1000);
+
+
+//download progress bar 
+
+//overall progress in 3 sec
+
+
+
+
+//   let count = 0;
+//   let progress = document.querySelector(".progress-bar");
+//   let percentText = document.querySelector(".percentage");
+//   let h3 = document.querySelector("h3")
+
+
+//   let interval = setInterval(() => {
+//     if (count < 100) {
+//       count++;
+//       progress.style.width = count + "%";
+//       percentText.textContent = count + "%";
+//     } else {
+//       clearInterval(interval);
+//       h3.textContent = "Downloaded"
+//     }
+//   }, 30);
+
+//   setInterval(() => {
+//      document.querySelector("#alert").style.display = "none"
+//   }, 3000);
+
