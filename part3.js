@@ -422,15 +422,15 @@
 //         card.appendChild(bio);
 
 
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.addEventListener("click", function() {
-            deleteUser(index);
-        })
+//         const deleteBtn = document.createElement("button");
+//         deleteBtn.textContent = "Delete";
+//         deleteBtn.addEventListener("click", function() {
+//             deleteUser(index);
+//         })
 
-        card.appendChild(deleteBtn);
+//         card.appendChild(deleteBtn);
 
-        container.appendChild(card)
+//         container.appendChild(card)
 
-    })
-}
+//     })
+// }
