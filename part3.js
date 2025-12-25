@@ -333,53 +333,104 @@
 
 // container.appendChild(card)
 
-const container = document.querySelector(".users")
+// const container = document.querySelector(".users")
 
-let users = [];
-function addUser(name, role, bio,) {
-    users.push({
-        name: name,
-        role: role,
-        bio: bio,
+// let users = [];
+// function addUser(name, role, bio,) {
+//     users.push({
+//         name: name,
+//         role: role,
+//         bio: bio,
         
-    });
-    renderUsers();
-}
+//     });
+//     renderUsers();
+// }
 
-function removeUser(index) {
-    users.splice(index, 1)
-    renderUsers();
-}
-
-
-function renderUsers(){
-    container.innerHTML = "";
-    users.forEach(function(user, index){
-    const card = document.createElement("div");
-    const userName = document.createElement("h3");
-    userName.textContent = user.name;
-    card.appendChild(userName);
+// function removeUser(index) {
+//     users.splice(index, 1)
+//     renderUsers();
+// }
 
 
-    const role = document.createElement("p");
-    role.textContent = user.role;
-    card.appendChild(role);
+// function renderUsers(){
+//     container.innerHTML = "";
+//     users.forEach(function(user, index){
+//     const card = document.createElement("div");
+//     const userName = document.createElement("h3");
+//     userName.textContent = user.name;
+//     card.appendChild(userName);
 
 
-    const bio = document.createElement("p");
-    bio.textContent = user.bio;
-    card.appendChild(bio)
+//     const role = document.createElement("p");
+//     role.textContent = user.role;
+//     card.appendChild(role);
+
+
+//     const bio = document.createElement("p");
+//     bio.textContent = user.bio;
+//     card.appendChild(bio)
 
     
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.addEventListener("click", function() {
-        removeUser(index);
+//     const deleteBtn = document.createElement("button");
+//     deleteBtn.textContent = "Delete";
+//     deleteBtn.addEventListener("click", function() {
+//         removeUser(index);
+//     })
+
+//     card.appendChild(deleteBtn);
+
+//     container.appendChild(card);
+// })
+// }
+
+
+const container = document.querySelector(".users");
+let users = [];
+
+function addUsers(name, role, bio) {
+    users.push({
+        name,
+        role,
+        bio
     })
+    renderUsers();
+}
 
-    card.appendChild(deleteBtn);
+function deleteUser(index) {
+    users.splice(index, 1);
+    renderUsers();
+}
 
-    container.appendChild(card);
-})
+function renderUsers() {
+    container.innerHTML = "";
+
+    users.forEach(function(user, index) {
+        const card = document.createElement("div");
+        const userName = document.createElement("h3");
+        userName.textContent = user.name;
+        card.appendChild(userName);
+
+
+        const role = document.createElement("p");
+        role.textContent = user.role;
+        card.appendChild(role);
+
+
+        const bio = document.createElement("p");
+        bio.textContent = user.bio;
+        card.appendChild(bio);
+
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", function() {
+            deleteUser(index);
+        })
+
+        card.appendChild(deleteBtn);
+
+        container.appendChild(card)
+
+    })
 }
