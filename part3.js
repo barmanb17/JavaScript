@@ -2,11 +2,11 @@
 
 
 
-function abcd() {
-    var a = 12
-}
+// function abcd() {
+//     var a = 12
+// }
 
-console.log(a) // a is not defined
+// console.log(a) // a is not defined
 
 // we cannot define a outside the function because its block scope
 
@@ -58,3 +58,51 @@ console.log(a) // a is not defined
 
 //here in function defg() a is 12 because js always follows lexical scoping , if it would follow dynamic scoping that it would be a = 13 in function defg();
 
+
+
+
+
+
+//closures- hote hain functions jo ki parent function ke under ho , aur ander wala funtion return ho raha ho, and returning function use kare parent function ka koi variable.
+
+// function abcd() {
+//     let a = 12;
+//     return function() {
+//         console.log(a);
+//     }
+// }
+// abcd();
+// the whole thing is closure
+//pros- private variables
+
+
+
+
+//toaster- popup notification 
+
+// function createToaster(config) {
+//     return function(str) {
+//         const div = document.createElement("div");
+//         div.textContent = str;
+//         div.className = "inline-block  bg-gray-800 text-white px-6 py-3 rounded shadow-lg pointer-events-none transition-opacity duration-300"
+//         document.querySelector(".parent").appendChild(div)
+//         setTimeout(() => {
+//             document.querySelector(".parent").removeChild(div)
+//         }, config.duration * 1000);
+//     }
+// }
+
+// let toaster = createToaster({
+//     positionX: "left",
+//     positionY: "top",
+//     theme: "dark",
+//     duration: 3,
+// });
+// toaster("download done");
+// setTimeout(()=> {
+//     toaster("download again  bithch")
+// },1000)
+
+
+
+//This keyword- ek special keyword hain, kyuki baki saare keywords ka nature same rehta hain , iska nature badal kata hain , is baat se ki app usey kaha use kar rahe ho.
