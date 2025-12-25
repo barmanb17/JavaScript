@@ -106,3 +106,47 @@
 
 
 //This keyword- ek special keyword hain, kyuki baki saare keywords ka nature same rehta hain , iska nature badal kata hain , is baat se ki app usey kaha use kar rahe ho.
+
+// //global scope 
+// console.log(this)// here this is - window
+
+// //function scope
+// function abcd() {
+//     console.log(this);
+// }
+// abcd(); //here this is - window
+
+//in method
+// let obj = {
+//     nam: "bijoy",
+//     sayName: function() {
+//         console.log(this.nam)
+// //     },
+// };
+// obj.sayName();
+ //here this is- not window that means in method this value is (object) eg- this.nam = "bijoy"
+//caution- agar function arrow function ho toh fir this ki value object nahi hogi .. tab this ki value window hi hogi. 
+//caoution- agar object ke under awr dusra funtion ho toh phir this ki value kho dega tab wo window ho jayega isko cater karneke liye function ke under function chahiye toh dusra function ke under arrow funtion banao
+
+
+//ek aesa function jo object ke under ho use method kehte hain, here sayName: is a method
+
+
+//event handler
+
+// document.querySelector("h1").addEventListener("click", function(){
+//     console.log(this) // here this is h1 
+// })
+
+// //class
+
+// class Abcd {
+    
+//     constructor(){
+//         console.log("hey");
+//         this.a = 12; //class ke under this ki value blank object rehti hain.
+//     }
+// }
+// let val = new Abcd();
+
+
