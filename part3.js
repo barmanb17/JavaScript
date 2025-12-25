@@ -124,7 +124,7 @@
 // //     },
 // };
 // obj.sayName();
- //here this is- not window that means in method this value is (object) eg- this.nam = "bijoy"
+//here this is- not window that means in method this value is (object) eg- this.nam = "bijoy"
 //caution- agar function arrow function ho toh fir this ki value object nahi hogi .. tab this ki value window hi hogi. 
 //caoution- agar object ke under awr dusra funtion ho toh phir this ki value kho dega tab wo window ho jayega isko cater karneke liye function ke under function chahiye toh dusra function ke under arrow funtion banao
 
@@ -141,7 +141,7 @@
 // //class
 
 // class Abcd {
-    
+
 //     constructor(){
 //         console.log("hey");
 //         this.a = 12; //class ke under this ki value blank object rehti hain.
@@ -150,3 +150,185 @@
 // let val = new Abcd();
 
 
+//manual binding: bind call and apply
+
+
+//call
+//function ko call karte waqt aap set kar sakte ho ki uski this ki value kya hogi with call
+// let obj = {
+//     name: "bijoy",
+//     age: 23
+
+// }
+// function abcd() {
+//     console.log(this.age)
+// }
+// abcd.call(obj);
+
+
+//apply
+// function abcd(a, b, c) {
+//     console.log(this, a, b, c)
+// }
+
+// abcd.apply(obj, [1, 2, 3])
+
+
+//bind
+
+// function abcd(a, b, c) {
+//     console.log(this, a, b, c)
+// }
+
+// let fnc = abcd.bind(obj, 1, 2, 3)
+
+// fnc();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//form.html -js part
+
+// const form = document.querySelector("#userForm");
+// const container = document.querySelector(".users");
+
+// const inputs = {
+//   name: document.querySelector("#name"),
+//   role: document.querySelector("#role"),
+//   bio: document.querySelector("#bio"),
+//   url: document.querySelector("#url"),
+// };
+
+// const userManager = {
+//   users: [],
+
+//   init() {
+//     form.addEventListener("submit", this.handleSubmit.bind(this));
+//   },
+
+//   handleSubmit(e) {
+//     e.preventDefault();
+
+//     const user = this.getFormData();
+//     this.addUser(user);
+//     form.reset();
+//     this.render();
+//   },
+
+//   getFormData() {
+//     return {
+//       name: inputs.name.value.trim(),
+//       role: inputs.role.value.trim(),
+//       bio: inputs.bio.value.trim(),
+//       url: inputs.url.value.trim(),
+//     };
+//   },
+
+//   addUser(user) {
+//     this.users.push(user);
+//   },
+
+//   render() {
+//     container.innerHTML = "";
+
+//     this.users.forEach((user, index) => {
+//       container.appendChild(this.createCard(user, index));
+//     });
+//   },
+
+//   createCard(user, index) {
+//     const card = document.createElement("div");
+//     card.className =
+//       "w-72 rounded-2xl bg-zinc-800/70 p-6 text-center shadow-lg backdrop-blur";
+
+//     const img = document.createElement("img");
+//     img.src = user.url;
+//     img.className = "mx-auto mb-4 h-20 w-20 rounded-full object-cover";
+
+//     const name = document.createElement("h3");
+//     name.className = "text-lg font-semibold";
+//     name.textContent = user.name;
+
+//     const role = document.createElement("p");
+//     role.className = "text-sm text-zinc-400";
+//     role.textContent = user.role;
+
+//     const bio = document.createElement("p");
+//     bio.className = "mt-2 text-sm text-zinc-300";
+//     bio.textContent = user.bio;
+
+//     const removeBtn = document.createElement("button");
+//     removeBtn.textContent = "Remove";
+//     removeBtn.className =
+//       "mt-4 rounded bg-red-600 px-4 py-1 text-sm hover:bg-red-700";
+
+//     removeBtn.onclick = () => {
+//       this.users.splice(index, 1);
+//       this.render();
+//     };
+
+//     card.append(img, name, role, bio, removeBtn);
+//     return card;
+//   },
+// };
+
+// userManager.init();
+
+
+
+
+
+
+
+
+
+
+
+//practice of this
+
+const container = document.querySelector(".users")
+
+let users = [];
+
+function addUser(name, role, bio, photo) {
+    users.push({
+        name: name,
+        role: role,
+        bio: bio,
+        photo: photo,
+    })
+}
+
+function removeUser(index) {
+    users.splice(index, 1)
+}
+
+
+
+
+users.forEach(function(user) {
+    const card = document.createElement("div");
+    const h3 = document.createElement("h3");
+    h3.textContent = user.name;
+    card.appendChild(h3);
+
+    const role = document.createElement("p");
+    role.textContent = user.role;
+    card.appendChild(role);
+
+    const bio = document.createElement("p");
+    bio.textContent = user.bio;
+    card.appendChild(bio);
+})
+
+container.appendChild(card)
