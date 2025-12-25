@@ -434,3 +434,66 @@
 
 //     })
 // }
+
+
+// const form = document.querySelector("#userForm");
+// const nameInput = document.querySelector("#name");
+// const roleInput = document.querySelector("#role");
+// const bioInput = document.querySelector("#bio");
+
+// form.addEventListener("submit", function (e) {
+//     e.preventDefault();
+
+//     addUsers(
+//         nameInput.value,
+//         roleInput.value,
+//         bioInput.value
+//     );
+
+//     form.reset();
+// });
+
+
+
+//object oriented programming
+
+// function CreateBiscuits(name, price, qty, company, category) {
+//     this.name = name;
+//     this.price = price;
+//     this.qty = qty;
+//     this.company = company;
+//     this.category = category;
+
+// }
+// let biscuit1 = new CreateBiscuits("ParleG", 10, 1, "Parle", "regular");
+// let biscuit2 = new CreateBiscuits("Good Day", 20 , 2, "Britannia", "Premium")
+
+//that is OOPS - making factories and using it all along the code.
+
+
+// function CreatePencil(name, price, color, company) {
+    
+//     this.name = name;
+//     this.price = price;
+//     this.color = color;
+//     this.company = company;
+//     this.write = function(text) {
+//         let h1 = document.createElement("h1");
+//         h1.textContent = text;
+//         h1.style.color = color;
+//         document.body.append(h1);
+//     };
+    
+
+// }
+// CreatePencil.prototype.class = "higher secondary"  // the field will go automatically on every new instances . yea use kiya ja sakta hain taki kam memory use ho every instances pe kyuki yea sab me hone wala hain toh bar bar ise likhneka koyi logic nahi hota
+
+// let Pencil1 = new CreatePencil("Natraj", 10, "green", "Natraj") //here this is blank object because of (new)
+
+// let Pencil2 = new CreatePencil("dom", 10, "black", "doms")
+// //these all are called constructor functions which are starts with capital lettters
+
+
+
+
+//classes
