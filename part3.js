@@ -819,17 +819,17 @@
 
 
 
-function calculateAverage(marksArray) {
-    let total = 0;
+// function calculateAverage(marksArray) {
+//     let total = 0;
 
-    marksArray.forEach(function(mark){
-        total = total + mark;
-    });
+//     marksArray.forEach(function(mark){
+//         total = total + mark;
+//     });
 
-    let average = total / marksArray.length;
+//     let average = total / marksArray.length;
 
-    return average;
-}
+//     return average;
+// }
 
-let result = calculateAverage([10, 20, 30, 40, 4, 23, 6, 5445, 3]);
-console.log(result);
+// let result = calculateAverage([10, 20, 30, 40, 4, 23, 6, 5445, 3]);
+// console.log(result);
