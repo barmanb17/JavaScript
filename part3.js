@@ -341,7 +341,7 @@
 //         name: name,
 //         role: role,
 //         bio: bio,
-        
+
 //     });
 //     renderUsers();
 // }
@@ -370,7 +370,7 @@
 //     bio.textContent = user.bio;
 //     card.appendChild(bio)
 
-    
+
 
 //     const deleteBtn = document.createElement("button");
 //     deleteBtn.textContent = "Delete";
@@ -472,7 +472,7 @@
 
 
 // function CreatePencil(name, price, color, company) {
-    
+
 //     this.name = name;
 //     this.price = price;
 //     this.color = color;
@@ -483,7 +483,7 @@
 //         h1.style.color = color;
 //         document.body.append(h1);
 //     };
-    
+
 
 // }
 // CreatePencil.prototype.class = "higher secondary"  // the field will go automatically on every new instances . yea use kiya ja sakta hain taki kam memory use ho every instances pe kyuki yea sab me hone wala hain toh bar bar ise likhneka koyi logic nahi hota
@@ -497,3 +497,128 @@
 
 
 //classes
+
+// class User {
+//     constructor(name, address, userName, email, e) {
+//         this.name = name;
+//         this.address = address;
+//         this.userName = userName;
+//         this.email = email;
+//         this.role = "user";
+//     }
+
+//     write(text) {
+//         let h1 = document.createElement("h1");
+//         h1.textContent = `${this.name}:${text}`;
+//         document.body.appendChild(h1)
+//     }
+//     checkRole(){
+//         console.log(this.role)
+//     }
+// }
+
+// class Admin extends User{
+//     constructor(name, address, userName, email ){
+//         super(name, address, userName, email )
+//         this.role = "admin"
+//     }
+//     remove(){
+//         document.querySelectorAll("h1").forEach(function(elem){
+//             elem.remove();
+//         })
+//     }
+//     checkRole(){
+//         console.log(this.role)
+//     }
+// }
+
+
+// let u1 = new User("bijoy", "nagaon", "vijjjay", "bijoybarman110@gmail.com", )
+// let u2 = new User("bijoya", "nagaon", "vijjjay", "bijoybarman110@gmail.com", )
+
+// let a1 = new Admin("admin1", "india", "adminn", "a@a.com")
+
+
+
+
+
+
+//Prototypal ineritance vs classical inheritance.
+
+//classical inheritance- classes banana awr unhe extend karna
+
+//prototypal inheritance- object to object inheritance
+
+// let coffee = {
+//     color: "dark",
+//     drink: function () {
+//         console.log("gut gut gut")
+//     }
+// }
+
+// let arabicaCoffee = Object.create(coffee);
+// arabicaCoffee.taste = "bitter"
+// arabicaCoffee.drink()
+
+//ek object ka saari props/methods ko inherit kar dena dusre object main = prototypal inheritance.
+
+
+
+
+
+
+//synchronous and asynchronous
+// koi bhi code js mein like by like chalega aur yea natural pattern bhi hota hai ki code line by line chale, but kabhi kabaar aisa cases aata hai life mein jaha par aapka code wait karta hai and utni der mein agla code chal jaata hain . 
+
+
+// console.log("hey1");
+// console.log("hey2");
+// setTimeout(() => {
+//     console.log("hey motherfuckers")
+// }, 2000);
+// console.log("hey3");
+// console.log("hey4");
+
+
+
+
+
+//callback pattern, callback hell
+
+// function kechDerBaadChalunga(fnc) {
+
+//     setTimeout(fnc, Math.floor(Math.random()*10)*1000);
+// }
+// kechDerBaadChalunga(function(){ //this is called callback function
+//     console.log("hey")
+// })
+
+//ek function ko agar aap ke aur function bhej de rahe ho parameter main toh parameter wala function kehlata hain callback
+
+
+//callback hell
+
+//callback ke under call back uske under awr ek callback is called callback hell
+
+
+//promises
+
+//aap ek promise banate ho joki do state mein se ek state me jaa sakta hain wnd wo yaa to resolve hoga ua to reject hoga ab wo kya hoga ye to waqt batayega par humein dono ke liye code likhna padta hai.
+
+
+let pr = new Promise(function (res, rej) {
+    setTimeout(() => {
+        let rn = Math.floor(Math.random()*10);
+        if(rn > 5) res("resolved with " + rn);
+        else rej ("rejected with " + rn)
+    }, 3000);
+});
+
+
+pr
+.then(function(val){
+ console.log(val)
+})
+.catch(function(val){
+ console.log(val)
+})
