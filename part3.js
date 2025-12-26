@@ -606,19 +606,230 @@
 //aap ek promise banate ho joki do state mein se ek state me jaa sakta hain wnd wo yaa to resolve hoga ua to reject hoga ab wo kya hoga ye to waqt batayega par humein dono ke liye code likhna padta hai.
 
 
-let pr = new Promise(function (res, rej) {
-    setTimeout(() => {
-        let rn = Math.floor(Math.random()*10);
-        if(rn > 5) res("resolved with " + rn);
-        else rej ("rejected with " + rn)
-    }, 3000);
-});
+// let pr = new Promise(function (res, rej) {
+//     setTimeout(() => {
+//         let rn = Math.floor(Math.random()*10);
+//         if(rn > 5) res("resolved with " + rn);
+//         else rej ("rejected with " + rn)
+//     }, 3000);
+// });
 
 
-pr
-.then(function(val){
- console.log(val)
-})
-.catch(function(val){
- console.log(val)
-})
+// pr
+// .then(function(val){
+//  console.log(val)
+// })
+// .catch(function(val){
+//  console.log(val)
+// })
+
+
+
+
+
+
+
+//async await
+
+
+// async function abcd() {
+//     let val = await pr;
+// }
+
+// abcd();
+
+
+
+//fetch api + http basics
+
+// fetch("https://randomuser.me/api/?results=5")
+// .then((raw) => raw.json())
+// .then((data) => console.log(data.results))
+
+
+
+// let marks = [ 45, 60, 78, 90]
+
+// for(let i = 0; i < marks.length; i++) {
+//     console.log(marks[i]);
+// }
+
+
+// let age = 32;
+
+// brothersAge = 23;
+
+// let gap = Math.abs(age - brothersAge);
+
+// console.log(`Age gap is ${gap} years`)
+
+
+// let priceOfPen = 10;
+// let priceOfnotebook = 40;
+// let quantityOfPen = 3;
+// let quantityOfnotebook = 2;
+
+// let totalbill = priceOfPen*quantityOfPen+priceOfnotebook*quantityOfnoteobook
+
+// console.log(totalbill);
+
+
+// let marks = 37;
+
+// if(marks >= 40) {
+//     console.log("Pass")
+// }else {
+//     console.log("Fail")
+// }
+
+
+// let age = 61;
+
+// // if (age < 18){
+// //     result = "Not eligible"
+// // } else if (age <= 60) {
+// //     result = "Eligible"
+// // } else {
+// //     result= "Senior citizen"
+// // }
+// // console.log(result)
+
+// let result = age < 18 ? "not eligible" : age <= 60 ? "eligible" : "senior citizen";
+
+
+
+// let number = 15;
+
+// let result = number%2 === 0 ? "Even" : "Odd";
+
+// console.log(result)
+
+// let billAmount = 2500;
+// let discount = 0;
+
+// if(billAmount > 2000) {
+//     discount = billAmount * 0.2;
+// } else if (billAmount > 1000 ) {
+//     discount = billAmount * 0.1;
+// } else {
+//     discount = 0;
+// }
+// let finalAmount = billAmount- discount
+// console.log(finalAmount);
+
+
+// let salary = 30000;
+// let experience = 3;
+// let bonus = 0;
+
+// if(experience >= 5){
+//     bonus = salary * 0.2;
+// } else if (experience >= 2) {
+//     bonus = salary * 0.1;
+// } else {
+//     bonus = 0;
+// }
+
+// let finalSalary = salary + bonus;
+
+// console.log(finalSalary);
+
+
+// let i = 20;
+
+// for(i=1; i<=20; i++) {
+//     console.log(i)
+// }
+// for(let i = 1; i <= 20; i++){
+//     console.log(i);
+// }
+
+
+// for(i=1; i<=50; i++){
+//     if(i%2===0){
+//         console.log(i)
+//     }
+// }
+
+// let num = 7;
+
+// for(let i = 1; i<=10; i++){
+//     console.log(`${num} * ${i} = ${num*i}  `)
+// }
+
+
+// let numbers = [10, 20, 30, 40];
+
+// let sum = 0;
+
+// numbers.forEach(function(num){
+//     sum = sum + num
+// });
+
+// console.log(sum);
+
+
+// let numbers = [5, 17, 3, 99, 45];
+
+// let marks = [35, 80, 42, 20, 90]
+
+// let pass = 0;
+
+// marks.forEach(function(mark) {
+//     if(mark>=40){
+//         pass++
+//     }
+// })
+
+// console.log(pass);
+
+
+
+
+// function countPass(marksAray) {
+//     let pass = 0;
+
+//     marksAray.forEach(function(mark){
+//         if(mark>=40){
+//             pass++;
+//         }
+//     });
+
+//     return pass;
+// }
+
+// let result = countPass([35, 80, 42, 20, 90]);
+// console.log(result);
+
+
+// function calculateAverage(marksArray) {
+//     total = 0
+//    let  marks = 0;
+
+//     marksArray.forEach(function(mark){
+//         marks = marks++
+//     })
+
+
+//     return marks;
+// }
+
+// calculateAverage([10, 20, 30, 40])
+// console.log(calculateAverage)
+
+
+
+function calculateAverage(marksArray) {
+    let total = 0;
+
+    marksArray.forEach(function(mark){
+        total = total + mark;
+    });
+
+    let average = total / marksArray.length;
+
+    return average;
+}
+
+let result = calculateAverage([10, 20, 30, 40, 4, 23, 6, 5445, 3]);
+console.log(result);
