@@ -183,3 +183,112 @@
 
 //     };
 // })();
+
+
+
+
+
+//factory function pattern
+
+// function createProduct(name, price) {
+//     let stock = 10;
+//     return {
+//         name,
+//         price,
+//         checkStock(){
+//             console.log(stock)
+//         },
+//         buy(qty) {
+//             if(qty <= stock){
+//                 stock-= qty;
+//                 console.log(`booked - ${stock} pieces left.`)
+
+//             } else {
+//                 console.log(`We only have ${stock} pieces left`)
+//             }
+//         },
+
+//         refill(qty) {
+//             stock += qty;
+//             console.log(`refilled- updated stock count is ${stock}`)
+//         }
+//     }
+// }
+
+// let story = createProduct("Iphone", 70000);
+
+
+//practice
+
+// function createWallet(totalMoney){
+    
+
+//     return {
+//         addMoney(money){
+//             totalMoney += money;
+//             console.log(`${money} rupees add, updated money is = ${totalMoney}`);
+//         },
+//         spendMoney(money){
+//             totalMoney -=money;
+//             console.log(`${money} rupees deducted, Updated balance is = ${totalMoney}`);
+//         },
+//         getMoney(){
+//             console.log(`Avalilable balance is = ${totalMoney}`);
+//         }
+//     }
+// }
+
+// const wallet = createWallet(500);
+// wallet.addMoney(200)
+// wallet.spendMoney(400)
+
+// wallet.getMoney()
+
+
+// function createWallet(initialAmmount){
+//     let balance = initialAmmount;
+
+//     return {
+//         addMoney(amount){
+//             if(amount <= 0){
+//                 return "Invalid Amount";
+//             }
+//             balance += amount;
+//             return balance;
+//         },
+//         spendMoney(amount){
+//             if (amount <= 0 ){
+//                 return "Invalid Amount";
+                
+//             } if (amount > balance) {
+//                 return "Insufficient Balance";
+//             }
+//             balance -= amount;
+//             return balance;
+//         },
+//         getBalance(){
+//             return balance;
+//         }
+//     }
+// }
+
+// const wallet = createWallet(500);
+// wallet.addMoney(200);
+// wallet.spendMoney(100);
+// console.log(wallet.getBalance())
+
+
+
+
+
+
+//Trottling and Debouncing
+//debouncing is like - searching something and getting similar products which changes the products with the search input every milisecond
+
+//throttling - har ek interval pe ek event occur hota hain.
+
+
+
+
+
+
