@@ -38,8 +38,7 @@
 //     let d = 12;
 //     function i(){
 //         console.log(d)
-//     }
-// }
+//     }}
 // d is lexically available in function efgh()
 
 

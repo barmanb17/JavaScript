@@ -74,26 +74,7 @@
 
 // })();
 
-// console.log(ConfigModule("users"))
-
-
-
-
-// const D = (function () {
-//     let x = 10;
-
-//     return {
-//         getX() {
-//             return x;
-//         },
-//         setX(v) {
-//             x = v;
-//         }
-//     };
-// })();
-
-// D.setX(20);
-// console.log(D.getX());
+// console.log(ConfigModule("users");
 
 
 // let game = (function(){
