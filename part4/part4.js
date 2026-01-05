@@ -269,7 +269,83 @@
 //throttling - har ek interval pe ek event occur hota hain.
 
 
+// let form = document.querySelector("div")
+
+// const throttleBottle = function(params) {
+//     params.preventDefault();
+//     let firstDiv = document.createElement("div");
+    
+//     let h1 = document.createElement("h1");
+//     h1.textContent = "JS mastery";
+//     firstDiv.appendChild(h1);
+
+
+//     const header = document.createElement("div");
+//     const logo = document.createElement("div");
+
+//     const navLinks = document.createElement("div");
+
+//     const button = document.createElement("button");
+
+//     button.addEventListener("click", function() {
+//         h1.textContent = "Versatile Staion";
+//         logo.innerHTML = this.scroll("src=https://www.pinterest.com/pin/104005072665186441/");
+
+
+//         navLinks.textContent = "{NavLinks.tells}"
+
+//     })
+
+// }
+
+//observer pattern practice
+
+
+// let score = 0; 
+
+// function addScore(points) {
+//     score += points;
+//     console.log("Score:", score);
+// }
+
+// addScore(5);
+
+
+// let value = 0;
+// let listeners = [];
+
+// function subscribe(fn) {
+//     listeners.push(fn);
+// }
+
+// function changeValue(newValue){
+//     value = newValue;
+//     listeners.forEach(fn => fn(value));
+// }
+
+
+// function listener1(val) {
+//     console.log("Listener 1 got:", val);
+// }
+
+// function listener2(val){
+//     console.log("Listener 2 got:", val);
+// }
+
+
+// subscribe(listener1);
+// subscribe(listener2);
+
+
+// changeValue(12);
 
 
 
+function hello(number) {
+    console.log("hello", number);
+}
 
+listeners = [];
+listeners.push(hello);
+
+listeners.forEach(fn => fn(5));
