@@ -341,11 +341,57 @@
 
 
 
-function hello(number) {
-    console.log("hello", number);
+// function hello(number) {
+//     console.log("hello", number);
+// }
+
+// listeners = [];
+// listeners.push(hello);
+
+// listeners.forEach(fn => fn(5));
+
+
+
+// let timerId;
+
+// function handleInput() {
+//     clearTimeout(timerId);
+
+//     timerId = setTimeout(() => {
+//         console.log("API call after typing stops");
+//     }, 500)
+// }
+
+// input.addEventListener("input", handleInput);
+
+// function search(query) {
+//     console.log("Searching for:", query);
+// }
+
+// const debouncedSearch = debounce(search, 500);
+
+// input.addEventListener("input", (e) => {
+//     debouncedSearch(e.target.value);
+// })
+
+function throttle(fn, delay) {
+    let lastTime = 0;
+
+    return function (...args) {
+        const now = Date.now();
+
+        if (now - lastTime >= delay) {
+            fn( ...args);
+            lastTime = now;
+        }
+    }
 }
 
-listeners = [];
-listeners.push(hello);
 
-listeners.forEach(fn => fn(5));
+function onScroll() {
+    console.log("Throttle scroll");
+}
+
+const throttledScroll = throttle(onscroll, 1000);
+
+window.addEventListener("scroll", throttledScroll);
