@@ -374,24 +374,141 @@
 //     debouncedSearch(e.target.value);
 // })
 
-function throttle(fn, delay) {
-    let lastTime = 0;
+// function throttle(fn, delay) {
+//     let lastTime = 0;
+
+//     return function (...args) {
+//         const now = Date.now();
+
+//         if (now - lastTime >= delay) {
+//             fn( ...args);
+//             lastTime = now;
+//         }
+//     }
+// }
+
+
+// function onScroll() {
+//     console.log("Throttle scroll");
+// }
+
+// const throttledScroll = throttle(onscroll, 1000);
+
+// window.addEventListener("scroll", throttledScroll);
+
+
+function debounce (fn, delay) {
+    let timer;
 
     return function (...args) {
-        const now = Date.now();
+        clearTimeout(timer);
 
-        if (now - lastTime >= delay) {
-            fn( ...args);
-            lastTime = now;
-        }
+        timer = setTimeout(() => {
+            fn(...args);
+        },delay);
     }
 }
 
 
-function onScroll() {
-    console.log("Throttle scroll");
+function debounce (fn, delay) {
+    let timer;
+
+    return function(...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    }
 }
 
-const throttledScroll = throttle(onscroll, 1000);
 
-window.addEventListener("scroll", throttledScroll);
+
+function debounce(fn, delay) {
+    let timer;
+
+    return function(...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    }
+}
+
+
+
+function debounce (fn, timer) {
+    let timer;
+
+    return function(...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    }
+}
+
+
+function debounce (fn, delay) {
+    let timer;
+
+    return function (...args) {
+        clearTimeout(timer);
+
+
+        timer = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    }
+}
+
+
+const deboundedFn = debounce(originalFn, 500);
+
+window.addEventListener("event", deboundedFn);
+
+
+
+function throttle(fn, delay) {
+    let lastTime = 0;
+
+    return function (...args) {
+        let now = Date.now();
+
+        if (now - lastTime >= delay) {
+            fn (...args);
+            lastTime = now;
+        }
+    };
+}
+
+
+function throttle( fn, delay) {
+    let lastTime = 0;
+
+    return function (...args) {
+        let now = Date.now();
+        if(now - lastTime >= delay) {
+            fn (...args);
+
+            lastTime = now;
+        }
+    };
+    
+}
+
+
+function throttle(fn, delay) {
+    let lastTime = 0;
+
+    return function (...args) {
+        let now = Date.now();
+
+        if( now-lastTime >= delay) {
+            fn(...args);
+            lastTime = now;
+        }
+    }
+}
