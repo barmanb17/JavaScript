@@ -512,3 +512,76 @@ function throttle(fn, delay) {
         }
     }
 }
+
+
+
+    function debounce(fn, delay) {
+      let timer;
+
+      return function (...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+          fn(...args);
+        }, delay);
+      };
+    }
+
+    function searchData(value) {
+      console.log("Searching for:", value);
+    }
+
+    const debouncedSearch = debounce(searchData, 500);
+
+    const input = document.getElementById("search");
+    input.addEventListener("input", function (e) {
+      debouncedSearch(e.target.value);
+    });
+
+
+
+     function throttle(fn, delay) {
+      let lastTime = 0;
+
+      return function (...args) {
+        const now = Date.now();
+
+        if (now - lastTime >= delay) {
+          fn(...args);
+          lastTime = now;
+        }
+      };
+    }
+
+    function onScroll() {
+      console.log("Scrolling...");
+    }
+
+    const throttledScroll = throttle(onScroll, 1000);
+
+    window.addEventListener("scroll", throttledScroll);
+
+
+
+
+
+      function debounce(fn, delay) {
+      let timer;
+
+      return function (...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+          fn(...args);
+        }, delay);
+      };
+    }
+
+    function handleClick() {
+      console.log("Button clicked!");
+    }
+
+    const debouncedClick = debounce(handleClick, 1000);
+
+    const button = document.getElementById("btn");
+    button.addEventListener("click", debouncedClick);
