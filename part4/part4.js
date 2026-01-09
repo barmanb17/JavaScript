@@ -484,6 +484,8 @@ function throttle(fn, delay) {
     };
 }
 
+//function to declare the addictive session cookies and the orientation of the login system
+
 
 function throttle( fn, delay) {
     let lastTime = 0;
@@ -537,6 +539,11 @@ function throttle(fn, delay) {
     input.addEventListener("input", function (e) {
       debouncedSearch(e.target.value);
     });
+
+
+    function searchData1 () {
+      console.log("Your device is succesfully logged In")
+    }
 
 
 
