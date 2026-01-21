@@ -397,198 +397,198 @@
 // window.addEventListener("scroll", throttledScroll);
 
 
-function debounce (fn, delay) {
-    let timer;
+// function debounce (fn, delay) {
+//     let timer;
 
-    return function (...args) {
-        clearTimeout(timer);
+//     return function (...args) {
+//         clearTimeout(timer);
 
-        timer = setTimeout(() => {
-            fn(...args);
-        },delay);
-    }
-}
-
-
-function debounce (fn, delay) {
-    let timer;
-
-    return function(...args) {
-        clearTimeout(timer);
-
-        timer = setTimeout(() => {
-            fn(...args);
-        }, delay);
-    }
-}
+//         timer = setTimeout(() => {
+//             fn(...args);
+//         },delay);
+//     }
+// }
 
 
+// function debounce (fn, delay) {
+//     let timer;
 
-function debounce(fn, delay) {
-    let timer;
+//     return function(...args) {
+//         clearTimeout(timer);
 
-    return function(...args) {
-        clearTimeout(timer);
-
-        timer = setTimeout(() => {
-            fn(...args);
-        }, delay);
-    }
-}
+//         timer = setTimeout(() => {
+//             fn(...args);
+//         }, delay);
+//     }
+// }
 
 
 
-function debounce (fn, timer) {
-    let timer;
+// function debounce(fn, delay) {
+//     let timer;
 
-    return function(...args) {
-        clearTimeout(timer);
+//     return function(...args) {
+//         clearTimeout(timer);
 
-        timer = setTimeout(() => {
-            fn(...args);
-        }, delay);
-    }
-}
-
-
-function debounce (fn, delay) {
-    let timer;
-
-    return function (...args) {
-        clearTimeout(timer);
-
-
-        timer = setTimeout(() => {
-            fn(...args);
-        }, delay);
-    }
-}
-
-
-const deboundedFn = debounce(originalFn, 500);
-
-window.addEventListener("event", deboundedFn);
+//         timer = setTimeout(() => {
+//             fn(...args);
+//         }, delay);
+//     }
+// }
 
 
 
-function throttle(fn, delay) {
-    let lastTime = 0;
+// function debounce (fn, timer) {
+//     let timer;
 
-    return function (...args) {
-        let now = Date.now();
+//     return function(...args) {
+//         clearTimeout(timer);
 
-        if (now - lastTime >= delay) {
-            fn (...args);
-            lastTime = now;
-        }
-    };
-}
-
-//function to declare the addictive session cookies and the orientation of the login system
+//         timer = setTimeout(() => {
+//             fn(...args);
+//         }, delay);
+//     }
+// }
 
 
-function throttle( fn, delay) {
-    let lastTime = 0;
+// function debounce (fn, delay) {
+//     let timer;
 
-    return function (...args) {
-        let now = Date.now();
-        if(now - lastTime >= delay) {
-            fn (...args);
+//     return function (...args) {
+//         clearTimeout(timer);
 
-            lastTime = now;
-        }
-    };
+
+//         timer = setTimeout(() => {
+//             fn(...args);
+//         }, delay);
+//     }
+// }
+
+
+// const deboundedFn = debounce(originalFn, 500);
+
+// window.addEventListener("event", deboundedFn);
+
+
+
+// function throttle(fn, delay) {
+//     let lastTime = 0;
+
+//     return function (...args) {
+//         let now = Date.now();
+
+//         if (now - lastTime >= delay) {
+//             fn (...args);
+//             lastTime = now;
+//         }
+//     };
+// }
+
+// //function to declare the addictive session cookies and the orientation of the login system
+
+
+// function throttle( fn, delay) {
+//     let lastTime = 0;
+
+//     return function (...args) {
+//         let now = Date.now();
+//         if(now - lastTime >= delay) {
+//             fn (...args);
+
+//             lastTime = now;
+//         }
+//     };
     
-}
+// }
 
 
-function throttle(fn, delay) {
-    let lastTime = 0;
+// function throttle(fn, delay) {
+//     let lastTime = 0;
 
-    return function (...args) {
-        let now = Date.now();
+//     return function (...args) {
+//         let now = Date.now();
 
-        if( now-lastTime >= delay) {
-            fn(...args);
-            lastTime = now;
-        }
-    }
-}
-
-
-
-    function debounce(fn, delay) {
-      let timer;
-
-      return function (...args) {
-        clearTimeout(timer);
-
-        timer = setTimeout(() => {
-          fn(...args);
-        }, delay);
-      };
-    }
-
-    function searchData(value) {
-      console.log("Searching for:", value);
-    }
-
-    const debouncedSearch = debounce(searchData, 500);
-
-    const input = document.getElementById("search");
-    input.addEventListener("input", function (e) {
-      debouncedSearch(e.target.value);
-    });
-
-
-    function searchData1 () {
-      console.log("Your device is succesfully logged In")
-    }
+//         if( now-lastTime >= delay) {
+//             fn(...args);
+//             lastTime = now;
+//         }
+//     }
+// }
 
 
 
-     function throttle(fn, delay) {
-      let lastTime = 0;
+//     function debounce(fn, delay) {
+//       let timer;
 
-      return function (...args) {
-        const now = Date.now();
+//       return function (...args) {
+//         clearTimeout(timer);
 
-        if (now - lastTime >= delay) {
-          fn(...args);
-          lastTime = now;
-        }
-      };
-    }
+//         timer = setTimeout(() => {
+//           fn(...args);
+//         }, delay);
+//       };
+//     }
 
-    function onScroll() {
-      console.log("Scrolling...");
-    }
+//     function searchData(value) {
+//       console.log("Searching for:", value);
+//     }
 
-    const throttledScroll = throttle(onScroll, 1000);
+//     const debouncedSearch = debounce(searchData, 500);
 
-    window.addEventListener("scroll", throttledScroll);
+//     const input = document.getElementById("search");
+//     input.addEventListener("input", function (e) {
+//       debouncedSearch(e.target.value);
+//     });
+
+
+//     function searchData1 () {
+//       console.log("Your device is succesfully logged In")
+//     }
+
+
+
+//      function throttle(fn, delay) {
+//       let lastTime = 0;
+
+//       return function (...args) {
+//         const now = Date.now();
+
+//         if (now - lastTime >= delay) {
+//           fn(...args);
+//           lastTime = now;
+//         }
+//       };
+//     }
+
+//     function onScroll() {
+//       console.log("Scrolling...");
+//     }
+
+//     const throttledScroll = throttle(onScroll, 1000);
+
+//     window.addEventListener("scroll", throttledScroll);
 
 
 
 
 
-      function debounce(fn, delay) {
-      let timer;
+//       function debounce(fn, delay) {
+//       let timer;
 
-      return function (...args) {
-        clearTimeout(timer);
+//       return function (...args) {
+//         clearTimeout(timer);
 
-        timer = setTimeout(() => {
-          fn(...args);
-        }, delay);
-      };
-    }
+//         timer = setTimeout(() => {
+//           fn(...args);
+//         }, delay);
+//       };
+//     }
 
-    function handleClick() {
-      console.log("Button clicked!");
-    }
+//     function handleClick() {
+//       console.log("Button clicked!");
+//     }
 
-    const debouncedClick = debounce(handleClick, 1000);
+//     const debouncedClick = debounce(handleClick, 1000);
 
-    const button = document.getElementById("btn");
-    button.addEventListener("click", debouncedClick);
+//     const button = document.getElementById("btn");
+//     button.addEventListener("click", debouncedClick);
